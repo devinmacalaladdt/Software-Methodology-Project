@@ -19,7 +19,13 @@ public class ShoppingBag {
 	 *@return
 	 */
 	
-	public ShoppingBag() {}
+	public ShoppingBag(int capacity) {
+		
+		bag = new GroceryItem[capacity];
+		this.size = 0;
+		this.capacity = capacity;	
+		
+	}
 	/**
 	 *
 	 *@param
@@ -68,5 +74,17 @@ public class ShoppingBag {
 	 */
 	
 	public void print() {}
+	
+	/**
+	 *
+	 *@param
+	 *@return
+	 */
+	
+	public int getSize() {
+		
+		return size;
+		
+	}
 
 }
