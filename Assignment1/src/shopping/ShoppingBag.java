@@ -74,7 +74,6 @@ public class ShoppingBag {
 	 */
 	
 	public void print() {}
-	
 	/**
 	 *
 	 *@param
@@ -86,5 +85,17 @@ public class ShoppingBag {
 		return size;
 		
 	}
+	/**
+	 *
+	 *@param
+	 *@return
+	 */
+	
+	public int getCapacity() {
+		
+		return capacity;
+		
+	}
+
 
 }
