@@ -1,5 +1,5 @@
 package shopping;
-
+import java.text.DecimalFormat;
 
 /**
  * 
@@ -11,6 +11,12 @@ public class GroceryItem {
 	private String name;
 	private double price;
 	private boolean taxable;
+	
+	/**
+	 *
+	 *@param
+	 *@return
+	 */
 	
 	public GroceryItem(String name, double price, boolean taxable) {
 		
@@ -25,14 +31,25 @@ public class GroceryItem {
 	 *@return
 	 */
 	
-	public boolean equals(Object obj) {return false;}
+	public boolean equals(Object obj) {
+		
+		return ((((GroceryItem)obj).name).equals(name) && 
+				((GroceryItem)obj).price==price && ((GroceryItem)obj).taxable==taxable);
+		
+	}
 	/**
 	 *
 	 *@param
 	 *@return
 	 */
 	
-	public String toString() {return "";}
+	public String toString() {
+		
+		DecimalFormat df2 = new DecimalFormat("#.##");
+		
+		return name+": $"+df2.format(price)+" : "+ (taxable?"is taxable":"tax free");
+		
+	}
 	/**
 	 *
 	 *@param

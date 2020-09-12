@@ -32,7 +32,21 @@ public class ShoppingBag {
 	 *@return
 	 */
 	
-	private int find(GroceryItem item) {return 0;}
+	private int find(GroceryItem item) {
+		
+		for(int i = 0; i<size;i++) {
+			
+			if((bag[i]).equals(item)) {
+				
+				return i;
+				
+			}
+			
+		}
+		
+		return -1;
+		
+	}
 	/**
 	 *
 	 *@param
@@ -60,20 +74,60 @@ public class ShoppingBag {
 	 *@return
 	 */
 	
-	public double salesPrice() {return 0;}
+	public double salesPrice() {
+		
+		double result = 0;
+		
+		for(int i = 0; i<size; i++) {
+			
+			result += (bag[i]).getPrice();
+			
+		}
+		
+		return result;
+		
+	}
 	/**
 	 *
 	 *@param
 	 *@return
 	 */
-	public double salesTax() {return 0;}
+	public double salesTax() {
+		
+		double result = 0;
+		
+		for(int i = 0; i<size; i++) {
+			
+			if((bag[i]).getTaxable()) {
+				
+				result += (bag[i]).getPrice()*0.06625;
+				
+			}
+			
+		}
+		
+		return result;
+		
+	}
 	/**
 	 *
 	 *@param
 	 *@return
 	 */
 	
-	public void print() {}
+	public void print() {
+		
+		System.out.println("**You have 3 items in the bag.");
+		
+		for(int i = 0; i<size; i++) {
+			
+			System.out.println("· "+ (bag[i]).toString());
+			
+		}
+		
+		System.out.println("**End of list");
+		
+	}
 	/**
 	 *
 	 *@param
