@@ -54,6 +54,7 @@ public class Shopping {
 			
 		}
 		
+		in.close();
 		System.out.println("Thanks for shopping with us!");
 		
 	}
