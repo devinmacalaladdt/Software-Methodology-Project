@@ -1,5 +1,4 @@
 package shopping;
-import java.text.DecimalFormat;
 
 /**
  * 
@@ -45,9 +44,8 @@ public class GroceryItem {
 	
 	public String toString() {
 		
-		DecimalFormat df2 = new DecimalFormat("#.##");
 		
-		return name+": $"+df2.format(price)+" : "+ (taxable?"is taxable":"tax free");
+		return name+": $"+String.format("%.2f",price)+" : "+ (taxable?"is taxable":"tax free");
 		
 	}
 	/**

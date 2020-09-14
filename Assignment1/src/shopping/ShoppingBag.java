@@ -144,15 +144,12 @@ public class ShoppingBag {
 	
 	public void print() {
 		
-		System.out.println("**You have " + size + " items in the bag.");
-		
 		for(int i = 0; i<size; i++) {
 			
 			System.out.println("· "+ (bag[i]).toString());
 			
 		}
 		
-		System.out.println("**End of list");
 		
 	}
 	/**
