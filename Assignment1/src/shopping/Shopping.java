@@ -28,9 +28,29 @@ public class Shopping {
 			switch(line[0]) {
 			
 				case "A": 
+					if(line.length > 3) {
+					GroceryItem item;
+					if(line[3].equals("false"))
+						item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
+					else
+						item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
+					bag.add(item);
+					System.out.println(line[1] + " was added to the bag.");
+					}
 					break;
 				
 				case "R":
+					if(line.length > 3) {
+						GroceryItem item;
+						if(line[3].equals("false"))
+							item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
+						else
+							item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
+						if(!bag.remove(item))
+							System.out.println("Unable to remove, this item is not in the bag.");
+						else
+							System.out.println(line[1] + " " + line[2] + " removed.");
+					}
 					break;
 					
 				case "P":
