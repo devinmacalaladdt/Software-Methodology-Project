@@ -55,7 +55,7 @@ public class ShoppingBag {
 	
 	private void grow()
 	{
-		GroceryItem[] biggerBag = new GroceryItem[bag.length*2];
+		GroceryItem[] biggerBag = new GroceryItem[bag.length+5];
 		for(int x = 0; x < size; x++)
 			biggerBag[x] = bag[x];
 		bag = biggerBag;
@@ -69,7 +69,7 @@ public class ShoppingBag {
 	
 	public void add(GroceryItem item) 
 	{
-		if(size >= (int)((.75)*capacity))
+		if(size >= capacity)
 			grow();
 		bag[size] = item;
 		size++;
