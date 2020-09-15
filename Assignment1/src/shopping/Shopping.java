@@ -28,29 +28,13 @@ public class Shopping {
 			switch(line[0]) {
 			
 				case "A": 
-					if(line.length > 3) {
-					GroceryItem item;
-					if(line[3].equals("false"))
-						item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
-					else
-						item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
-					bag.add(item);
-					System.out.println(line[1] + " was added to the bag.");
-					}
+					
+					add(bag,line);
 					break;
 				
 				case "R":
-					if(line.length > 3) {
-						GroceryItem item;
-						if(line[3].equals("false"))
-							item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
-						else
-							item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
-						if(!bag.remove(item))
-							System.out.println("Unable to remove, this item is not in the bag.");
-						else
-							System.out.println(line[1] + " " + line[2] + " removed.");
-					}
+
+					remove(bag,line);
 					break;
 					
 				case "P":
@@ -61,6 +45,7 @@ public class Shopping {
 				case "C":
 					
 					checkout(bag);
+					bag = new ShoppingBag(5);
 					break;
 					
 				default:
@@ -103,6 +88,7 @@ public class Shopping {
 		System.out.println("*Sales total: $"+String.format("%.2f",salesTax));
 		System.out.println("*Total amount paid: $"+String.format("%.2f",totalAmount));
 		
+		
 	}
 	
 	private void print(ShoppingBag bag) {
@@ -116,6 +102,32 @@ public class Shopping {
 		System.out.println("**You have " + bag.getSize() + " items in the bag.");
 		bag.print();
 		System.out.println("**End of list");
+		
+	}
+	
+	private void add(ShoppingBag bag, String[] line) {
+		
+		GroceryItem item;
+		if(line[3].equals("false"))
+			item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
+		else
+			item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
+		bag.add(item);
+		System.out.println(line[1] + " was added to the bag.");
+		
+	}
+	
+	private void remove(ShoppingBag bag, String[] line) {
+		
+		GroceryItem item;
+		if(line[3].equals("false"))
+			item = new GroceryItem(line[1], Double.parseDouble(line[2]), false);
+		else
+			item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
+		if(!bag.remove(item))
+			System.out.println("Unable to remove, this item is not in the bag.");
+		else
+			System.out.println(line[1] + " " + line[2] + " removed.");
 		
 	}
 	

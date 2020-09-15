@@ -122,12 +122,13 @@ public class ShoppingBag {
 	public double salesTax() {
 		
 		double result = 0;
+		double tax = 0.06625;
 		
 		for(int i = 0; i<size; i++) {
 			
 			if((bag[i]).getTaxable()) {
 				
-				result += (bag[i]).getPrice()*0.06625;
+				result += (bag[i]).getPrice()*tax;
 				
 			}
 			
