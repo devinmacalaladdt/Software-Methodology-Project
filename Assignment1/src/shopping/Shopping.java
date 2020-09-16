@@ -3,18 +3,18 @@ import java.util.*;
 
 
 /**
- * 
- * @author devin
+ * Shopping contains the necessary functionality to handle I/O for the application. 
+ * It continuously accepts commands from the console and handles them accordingly 
+ * by calling relevant methods to specific commands.
+ * @author Devin Macalalad, David Gasperini
  */
 
 public class Shopping {
 	
 	/**
-	 *
-	 *@param
-	 *@return
+	 * Accepts input commands from console and calls helper methods accordingly until user quits.
+	 * Invalid commands are handled by outputting an error message, valid commands give validation output.
 	 */
-	
 	public void run() {
 		
 		System.out.println("Let\'s start shopping!");
@@ -70,6 +70,12 @@ public class Shopping {
 		
 	}
 	
+	/**
+	 * Checks out the bag by first checking for a non-empty bag, printing each item, then displaying the
+	 * total of the prices and taxes and summing for the total amount paid.
+	 * If the bag is empty, and error is displayed.
+	 * @param shopping bag object to be checked out.
+	 */
 	private void checkout(ShoppingBag bag) {
 		
 		if(bag.getSize()==0) {
@@ -91,6 +97,11 @@ public class Shopping {
 		
 	}
 	
+	/**
+	 * Prints the bag by first checking if its non-empty, then calls the 'print' method.
+	 * If the bag is empty, and error is displayed.
+	 * @param shopping bag object to be printed.
+	 */
 	private void print(ShoppingBag bag) {
 		
 		if(bag.getSize()==0) {
@@ -105,6 +116,11 @@ public class Shopping {
 		
 	}
 	
+	/**
+	 * Adds specified item from input to bag via the 'add' method.
+	 * @param shopping bag to add to.
+	 * @param input line to extract command from.
+	 */
 	private void add(ShoppingBag bag, String[] line) {
 		
 		GroceryItem item;
@@ -117,6 +133,11 @@ public class Shopping {
 		
 	}
 	
+	/**
+	 * Removes specified item from the bag. If the item is not found, an error is displayed.
+	 * @param shopping bag to remove item from
+	 * @param input line to extract command from.
+	 */
 	private void remove(ShoppingBag bag, String[] line) {
 		
 		GroceryItem item;

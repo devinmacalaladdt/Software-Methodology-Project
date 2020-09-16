@@ -3,8 +3,9 @@ package shopping;
 
 
 /**
- * 
- * @author devin
+ * Driver class for the application.
+ * Instantiates a Shopping class and calls 'run'.
+ * @author Devin Macalalad, David Gasperini
  */
 
 public class RunProject1 {

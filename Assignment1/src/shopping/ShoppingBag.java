@@ -2,8 +2,11 @@ package shopping;
 
 
 /**
- * 
- * @author devin
+ * ShoppingBag is a representation of a bag containing store items (GroceryItems).
+ * It contains a GroceryItem array to represent all items, a current size, and a dynamic capacity.
+ * Items can be added and removed, and the bag itself can grow in size and capacity when
+ * capacity is reached.
+ * @author Devin Macalalad, David Gasperini
  */
 
 public class ShoppingBag {
@@ -14,11 +17,9 @@ public class ShoppingBag {
 	
 	
 	/**
-	 *
-	 *@param
-	 *@return
+	 * Constructor for a shopping bag object. Sets default values for members.
+	 * @param initial capacity of the shopping bag.
 	 */
-	
 	public ShoppingBag(int capacity) {
 		
 		bag = new GroceryItem[capacity];
@@ -26,12 +27,12 @@ public class ShoppingBag {
 		this.capacity = capacity;	
 		
 	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
 	
+	/**
+	 * Iterates through bag array searching for specified GroceryItem. Compares via 'equals' method.
+	 * @param GroceryItem to be searched for in bag array.
+	 * @return index of the found GroceryItem in the bag array, -1 if the item was not found.
+	 */
 	private int find(GroceryItem item) {
 		
 		for(int i = 0; i<size;i++) {
@@ -47,12 +48,11 @@ public class ShoppingBag {
 		return -1;
 		
 	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
 	
+	/**
+	 * Creates a new bag array with an increased size by 5 and copies all current items into it.
+	 * Resets bag member to point to this new array.
+	 */
 	private void grow()
 	{
 		GroceryItem[] biggerBag = new GroceryItem[bag.length+5];
@@ -61,12 +61,12 @@ public class ShoppingBag {
 		bag = biggerBag;
 		capacity = biggerBag.length;
 	}
-	/**
-	 *
-	 *@param item GroceryItem to be added to the shopping bag
-	 *@return
-	 */
 	
+	/**
+	 * Adds specified GroceryItem to the bag array by first checking if it will exceed capacity.
+	 * If so, the 'grow' method is called first.
+	 * @param item GroceryItem to be added to the shopping bag.
+	 */
 	public void add(GroceryItem item) 
 	{
 		if(size >= capacity)
@@ -74,13 +74,13 @@ public class ShoppingBag {
 		bag[size] = item;
 		size++;
 	}
-	/**
-	 *
-	 *@param item GroceryItem to be removed from the shopping bag
-	 *@return true was able to remove the item
-	 *@return false was unable to find the item and hence it could not be removed
-	 */
 	
+	/**
+	 * Removes specified GroceryItem from the bag array after searching for it using the 'find' method.
+	 * @param item GroceryItem to be removed from the shopping bag.
+	 * @return true was able to remove the item
+	 * false was unable to find the item and hence it could not be removed.
+	 */
 	public boolean remove(GroceryItem item)
 	{
 		int index = find(item);
@@ -95,12 +95,11 @@ public class ShoppingBag {
 		}
 		return false;
 	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
 	
+	/**
+	 * Iterates over the bag array to sum up the prices for all items.
+	 * @return summation of all prices currently in the bag array.
+	 */
 	public double salesPrice() {
 		
 		double result = 0;
@@ -114,10 +113,11 @@ public class ShoppingBag {
 		return result;
 		
 	}
+	
 	/**
-	 *
-	 *@param
-	 *@return
+	 * Iterates over the bag array to sum up the tax amounts for each item by taking the product of
+	 * the price and tax amount (0.06625).
+	 * @return summation of all taxes currently in the bag array.
 	 */
 	public double salesTax() {
 		
@@ -137,12 +137,10 @@ public class ShoppingBag {
 		return result;
 		
 	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
 	
+	/**
+	 * Prints information for all items currently in the bag array via the 'toString' method.
+	 */
 	public void print() {
 		
 		for(int i = 0; i<size; i++) {
@@ -153,26 +151,14 @@ public class ShoppingBag {
 		
 		
 	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
 	
+	/**
+	 * Getter for the private member 'size'.
+	 * @return size of the shopping bag.
+	 */
 	public int getSize() {
 		
 		return size;
-		
-	}
-	/**
-	 *
-	 *@param
-	 *@return
-	 */
-	
-	public int getCapacity() {
-		
-		return capacity;
 		
 	}
 
