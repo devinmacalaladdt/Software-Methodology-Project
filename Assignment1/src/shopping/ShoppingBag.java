@@ -79,7 +79,7 @@ public class ShoppingBag {
 	 * Removes specified GroceryItem from the bag array after searching for it using the 'find' method.
 	 * @param item GroceryItem to be removed from the shopping bag.
 	 * @return true was able to remove the item
-	 * false was unable to find the item and hence it could not be removed.
+	 * @return false was unable to find the item and hence it could not be removed.
 	 */
 	public boolean remove(GroceryItem item)
 	{
@@ -162,5 +162,81 @@ public class ShoppingBag {
 		
 	}
 
+	/** Testbed main method designed to test the methods included in this class */
+	public static void main(String[] args) {
+		final int sampleSize = 100;
+		System.out.println("Initialize bags at capacity " + sampleSize);
+		ShoppingBag bag1 = new ShoppingBag((int) ((Math.random()*(sampleSize/2))+1));
+		ShoppingBag bag2 = new ShoppingBag((int) ((Math.random()*(sampleSize/2))+1));
+		ShoppingBag bag3 = new ShoppingBag((int) ((Math.random()*(sampleSize/2))+1));
+		
+		System.out.println("Sequential Add");
+		for(int x = 0; x < sampleSize; x++) {
+			GroceryItem item = new GroceryItem("test_item"+x, x, (x%2==1));
+			bag1.add(item);
+			bag2.add(item);
+			bag3.add(item);
+		}
+		
+		System.out.println("Find test:");
+		boolean failed = false;
+		for(int x = 0; x < sampleSize; x+=5) {
+			GroceryItem item = new GroceryItem("test_item"+x, x, (x%2==1));
+			if(bag1.find(item) == -1) {
+				failed = true;
+				System.out.println("Find failed to find " + item + " in bag1");}
+			if(bag2.find(item) == -1) {
+				failed = true;
+				System.out.println("Find failed to find " + item + " in bag2");}
+			if(bag3.find(item) == -1) {
+				failed = true;
+				System.out.println("Find failed to find " + item + " in bag3");}
+		}
+		if(!failed) System.out.println("[Passed]");
+		
+		System.out.println("Size check:");
+		if(bag1.getSize() != sampleSize) System.out.println("Size test failed for bag1");
+		if(bag2.getSize() != sampleSize) System.out.println("Size test failed for bag2");
+		if(bag3.getSize() != sampleSize) System.out.println("Size test failed for bag3");
+		if(bag1.getSize() == sampleSize && bag2.getSize() == sampleSize && bag3.getSize() == sampleSize) System.out.println("[Passed]");
+		
+		
+		System.out.println("bag1: " + "sales tax - " + Math.round(bag1.salesTax()*100.0)/100.0 + "  sales price - " + Math.round((bag1.salesPrice())*100.0)/100.0);
+		System.out.println("bag2: " + "sales tax - " + Math.round(bag2.salesTax()*100.0)/100.0 + "  sales price - " + Math.round((bag2.salesPrice())*100.0)/100.0);
+		System.out.println("bag3: " + "sales tax - " + Math.round(bag3.salesTax()*100.0)/100.0 + "  sales price - " + Math.round((bag3.salesPrice())*100.0)/100.0);
+		double price = 0, tax = 0;
+		for(int x = 0; x < sampleSize; x++) {
+			price += x;
+			if(x % 2 == 1)
+				tax += 0.06625*x;
+		}
+		System.out.println("Expected tax: " + Math.round(tax*100.0)/100.0 + "  Expected price: " + Math.round((price)*100.0)/100.0);
+		
+		System.out.println("Sequential remove front to back (bag1)");
+		for(int x = 0; x < sampleSize; x++) {
+			GroceryItem item = new GroceryItem("test_item"+x, x, (x%2==1));
+			bag1.remove(item);
+		}
+		
+		System.out.println("Sequential remove back to front (bag2)");
+		for(int x = sampleSize-1; x >= 0; x--) {
+			GroceryItem item = new GroceryItem("test_item"+x, x, (x%2==1));
+			bag2.remove(item);
+		}
+		
+		System.out.println("Random remove (bag3)");
+		for(int x = 0; x < sampleSize*2; x++) {
+			int rand = (int) ((Math.random()*(sampleSize-1))+1);
+			GroceryItem item = new GroceryItem("test_item"+rand, rand, (rand%2==1));
+			bag3.remove(item);
+		}
+		
+		System.out.println("bag1 contents: ");
+		bag1.print();
+		System.out.println("bag2 contents: ");
+		bag2.print();
+		System.out.println("bag3 contents: ");
+		bag3.print();
+	}
 
 }
