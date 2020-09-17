@@ -34,7 +34,7 @@ public class GroceryItem {
 	public boolean equals(Object obj) {
 		
 		return ((((GroceryItem)obj).name).equals(name) && 
-				((GroceryItem)obj).price==price && ((GroceryItem)obj).taxable==taxable);
+				((GroceryItem)obj).price == price && ((GroceryItem)obj).taxable == taxable);
 		
 	}
 	
@@ -45,7 +45,7 @@ public class GroceryItem {
 	public String toString() {
 		
 		
-		return name+": $"+String.format("%.2f",price)+" : "+ (taxable?"is taxable":"tax free");
+		return name+": $" + String.format("%.2f",price) + " : " + (taxable?"is taxable":"tax free");
 		
 	}
 	

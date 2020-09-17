@@ -59,7 +59,7 @@ public class Shopping {
 			
 		}
 		
-		if(bag.getSize()!=0) {
+		if(bag.getSize() != 0) {
 			
 			checkout(bag);
 			
@@ -78,21 +78,21 @@ public class Shopping {
 	 */
 	private void checkout(ShoppingBag bag) {
 		
-		if(bag.getSize()==0) {
+		if(bag.getSize() == 0) {
 			
 			System.out.println("Unable to check out, the bag is empty!");
 			return;
 			
 		}
 		
-		System.out.println("**Checking out "+bag.getSize()+" item(s):");
+		System.out.println("**Checking out " + bag.getSize() + " item(s):");
 		bag.print();
 		double salesTotal = bag.salesPrice();
 		double salesTax = bag.salesTax();
-		double totalAmount = salesTotal+salesTax;
-		System.out.println("*Sales total: $"+String.format("%.2f",salesTotal));
-		System.out.println("*Sales total: $"+String.format("%.2f",salesTax));
-		System.out.println("*Total amount paid: $"+String.format("%.2f",totalAmount));
+		double totalAmount = salesTotal + salesTax;
+		System.out.println("*Sales total: $" + String.format("%.2f",salesTotal));
+		System.out.println("*Sales total: $" + String.format("%.2f",salesTax));
+		System.out.println("*Total amount paid: $" + String.format("%.2f",totalAmount));
 		
 		
 	}
@@ -104,7 +104,7 @@ public class Shopping {
 	 */
 	private void print(ShoppingBag bag) {
 		
-		if(bag.getSize()==0) {
+		if(bag.getSize() == 0) {
 			
 			System.out.println("The bag is empty!");
 			return;
