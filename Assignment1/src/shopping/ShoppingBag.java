@@ -169,7 +169,6 @@ public class ShoppingBag {
 		System.out.println("add test:");
 		for(int x = 0; x < 5; x++) {
 			GroceryItem item = new GroceryItem("test_add" + x, x, (x % 2 == 1));
-			System.out.println("Adding Item - " + item.toString());
 			testBag.add(item);
 		}
 		testBag.print();
