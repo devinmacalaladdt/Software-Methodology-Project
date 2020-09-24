@@ -85,13 +85,13 @@ public class Shopping {
 			
 		}
 		
-		System.out.println("**Checking out " + bag.getSize() + " item(s):");
+		System.out.println("**Checking out " + bag.getSize() + (bag.getSize()>1?" items.":" item."));
 		bag.print();
 		double salesTotal = bag.salesPrice();
 		double salesTax = bag.salesTax();
 		double totalAmount = salesTotal + salesTax;
 		System.out.println("*Sales total: $" + String.format("%.2f",salesTotal));
-		System.out.println("*Sales total: $" + String.format("%.2f",salesTax));
+		System.out.println("*Sales tax: $" + String.format("%.2f",salesTax));
 		System.out.println("*Total amount paid: $" + String.format("%.2f",totalAmount));
 		
 		
@@ -129,7 +129,7 @@ public class Shopping {
 		else
 			item = new GroceryItem(line[1], Double.parseDouble(line[2]), true);
 		bag.add(item);
-		System.out.println(line[1] + " was added to the bag.");
+		System.out.println(line[1] + " added to the bag.");
 		
 	}
 	

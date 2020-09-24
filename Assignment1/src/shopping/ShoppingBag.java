@@ -145,7 +145,7 @@ public class ShoppingBag {
 		
 		for(int i = 0; i<size; i++) {
 			
-			System.out.println("· " + (bag[i]).toString());
+			System.out.println("·" + (bag[i]).toString());
 			
 		}
 		
