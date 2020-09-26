@@ -9,7 +9,7 @@ public class Date {
 	
 	public Date(String date) {
 		
-		String[] dates = date.split("[\\]");
+		String[] dates = date.split("[/]");
 		if(dates.length==3) {
 			
 			month = Integer.parseInt(dates[0]);
