@@ -5,6 +5,7 @@ public abstract class Account {
 	private double balance;
 	private Date dateOpen;
 	
+	
 	/**
 	 * Removes amount from the holder's balance
 	 * @param amount : quantity to debit
@@ -25,14 +26,6 @@ public abstract class Account {
 			balance += amount;
 	}
 	
-	/**
-	 * Overrides object's toString method
-	 */
-	@Override
-	public String toString() 
-	{
-		return "" + holder + " " + balance + " " + dateOpen;
-	}
 	
 	/**
 	 * accessor for balance
@@ -58,6 +51,27 @@ public abstract class Account {
 		return holder;
 	}
 	
+	public void setHolder(Profile holder) {
+		
+		this.holder = holder;
+		
+	}
+	
+	public void setBalance(double balance) {
+		
+		this.balance = balance;
+		
+	}
+	
+	public void setDateOpen(Date dateOpen) {
+		
+		this.dateOpen = dateOpen;
+		
+	}
+	
+	
 	public abstract double monthlyInterest();
 	public abstract double monthlyFee();
+	public abstract String toString();
+	public abstract boolean equals(Account account);
 }

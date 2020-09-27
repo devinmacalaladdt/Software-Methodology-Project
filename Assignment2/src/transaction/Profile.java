@@ -20,6 +20,12 @@ public class Profile {
 	{
 		return lname;
 	}
+	
+	public String getfname() {
+		
+		return fname;
+		
+	}
 
 	/**
 	 * compares two holder last names for sorting purposes in AccountDatabase

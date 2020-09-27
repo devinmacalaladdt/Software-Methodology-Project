@@ -5,6 +5,14 @@ public class AccountDatabase {
 	private static final int increment = 5;
 	private int size;
 	
+	
+	public AccountDatabase(int initialCapacity) {
+		
+		accounts = new Account[initialCapacity];
+		size = 0;
+		
+	}
+	
 	/**
 	 * Find the account and return its account index if found
 	 * @param account : account to search for in accounts
@@ -82,7 +90,7 @@ public class AccountDatabase {
 		int accountno = find(account);
 		if(accountno == -1 || amount <= 0)
 			return false;
-		account.credit(amount);
+		accounts[accountno].credit(amount);
 		return true;
 	}
 	
@@ -99,9 +107,14 @@ public class AccountDatabase {
 		int accountno = find(account);
 		if(accountno == -1)
 			return -1;
-		if(account.getBalance() < amount)
+		if(accounts[accountno].getBalance() < amount)
 			return 1;
-		account.debit(amount);
+		accounts[accountno].debit(amount);
+		if(account instanceof MoneyMarket) {
+			
+			((MoneyMarket)(accounts[accountno])).incrementWithdrawals();
+			
+		}
 		return 0;
 	}
 	
@@ -128,7 +141,25 @@ public class AccountDatabase {
 	public void printByDateOpen()
 	{
 		sortByDateOpen();
-		printAccounts();
+		for(Account a: accounts) {
+			
+			if(a!=null) {
+				
+				System.out.println();
+				System.out.println(a.toString());
+				System.out.println("-interest: $ " + String.format("%.2f",a.monthlyInterest()));
+				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
+				a.debit(a.monthlyFee()+a.monthlyInterest());
+				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
+				if(a instanceof MoneyMarket) {
+					
+					((MoneyMarket)a).resetWithdrawals();
+					
+				}
+				
+			}
+			
+		}
 	}
 	
 	/**
@@ -138,7 +169,25 @@ public class AccountDatabase {
 	public void printByLastName()
 	{
 		sortByLastName();
-		printAccounts();
+		for(Account a: accounts) {
+			
+			if(a!=null) {
+				
+				System.out.println();
+				System.out.println(a.toString());
+				System.out.println("-interest: $ " + String.format("%.2f",a.monthlyInterest()));
+				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
+				a.debit(a.monthlyFee()+a.monthlyInterest());
+				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
+				if(a instanceof MoneyMarket) {
+					
+					((MoneyMarket)a).resetWithdrawals();
+					
+				}
+				
+			}
+			
+		}
 	}
 	
 	/**
@@ -146,8 +195,22 @@ public class AccountDatabase {
 	 */
 	public void printAccounts()
 	{
-		for(Account a:accounts)
-			System.out.println(a);
+		for(Account a:accounts) {
+			
+			if(a!=null) {
+				
+				System.out.println(a.toString());
+				
+			}
+			
+		}
+			
+	}
+	
+	public int getSize() {
+		
+		return size;
+		
 	}
 	
 	/**
