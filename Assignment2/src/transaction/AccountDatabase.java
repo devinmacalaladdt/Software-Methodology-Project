@@ -219,11 +219,12 @@ public class AccountDatabase {
 	 */
 	private void bubbleSort(boolean byDate)
     {
+		if(accounts == null) return;
          boolean isSorted = false;
          while(isSorted == false)
          {
              isSorted = true;
-             for(int x = 0; x < accounts.length - 1; x++)
+             for(int x = 0; x < size - 1; x++)
              {
                  if((byDate && accounts[x].getDate().compareTo(accounts[x + 1].getDate()) > 0) || 
                 		 (!byDate && accounts[x].getHolder().compareTo(accounts[x + 1].getHolder()) > 0)){
