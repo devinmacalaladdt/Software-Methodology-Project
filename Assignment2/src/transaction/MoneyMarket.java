@@ -37,12 +37,6 @@ public class MoneyMarket extends Account{
 		
 	}
 	
-	public void resetWithdrawals() {
-		
-		withdrawals = 0;
-		
-	}
-	
 	@Override
 	public boolean equals(Account account) {
 		
