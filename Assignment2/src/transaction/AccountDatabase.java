@@ -152,11 +152,6 @@ public class AccountDatabase {
 				a.debit(a.monthlyFee());
 				a.credit((a.monthlyInterest()*a.getBalance())/12);
 				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
-				if(a instanceof MoneyMarket) {
-					
-					((MoneyMarket)a).resetWithdrawals();
-					
-				}
 				
 			}
 			
@@ -181,11 +176,6 @@ public class AccountDatabase {
 				a.debit(a.monthlyFee());
 				a.credit((a.monthlyInterest()*a.getBalance())/12);
 				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
-				if(a instanceof MoneyMarket) {
-					
-					((MoneyMarket)a).resetWithdrawals();
-					
-				}
 				
 			}
 			

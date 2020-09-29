@@ -328,7 +328,7 @@ public class TransactionManager {
 						case 'D':
 							
 							System.out.println("--Printing statements by date opened--");
-							account_db.printByLastName();
+							account_db.printByDateOpen();;
 							System.out.println("--end of printing--");
 							
 							break;
