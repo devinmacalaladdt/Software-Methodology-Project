@@ -20,7 +20,7 @@ public class MoneyMarket extends Account{
 	}
 	public double monthlyFee() {
 		
-		return (super.getBalance() >= 2500) && (withdrawals<=6) ? 0:25.00;
+		return (super.getBalance() >= 2500) && (withdrawals<=6) ? 0:12.00;
 		
 	}
 	

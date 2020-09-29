@@ -147,9 +147,10 @@ public class AccountDatabase {
 				
 				System.out.println();
 				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%.2f",a.monthlyInterest()));
+				System.out.println("-interest: $ " + String.format("%.2f",(a.monthlyInterest()*a.getBalance())/12));
 				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
-				a.debit(a.monthlyFee()+a.monthlyInterest());
+				a.debit(a.monthlyFee());
+				a.credit((a.monthlyInterest()*a.getBalance())/12);
 				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
 				if(a instanceof MoneyMarket) {
 					
@@ -175,9 +176,10 @@ public class AccountDatabase {
 				
 				System.out.println();
 				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%.2f",a.monthlyInterest()));
+				System.out.println("-interest: $ " + String.format("%.2f",(a.monthlyInterest()*a.getBalance())/12));
 				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
-				a.debit(a.monthlyFee()+a.monthlyInterest());
+				a.debit(a.monthlyFee());
+				a.credit((a.monthlyInterest()*a.getBalance())/12);
 				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
 				if(a instanceof MoneyMarket) {
 					
