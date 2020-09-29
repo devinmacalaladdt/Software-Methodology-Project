@@ -27,7 +27,7 @@ public class MoneyMarket extends Account{
 	public String toString() {
 		
 		return "*Money Market*"+(super.getHolder()).getfname()+" "+(super.getHolder()).getlname()+
-				"* $"+String.format("%.2f",super.getBalance())+"*"+(super.getDate()).toString()+"*"+withdrawals+" withdrawals*";            
+				"* $"+String.format("%,.2f",super.getBalance())+"*"+(super.getDate()).toString()+"*"+withdrawals+" withdrawals*";            
 		
 	}
 	

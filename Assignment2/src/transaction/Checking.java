@@ -29,7 +29,7 @@ public class Checking extends Account{
 		String dd = (directDeposit)?"*direct deposit account*":"";
 		
 		return "*Checking*"+(super.getHolder()).getfname()+" "+(super.getHolder()).getlname()+
-				"* $"+String.format("%.2f",super.getBalance())+"*"+(super.getDate()).toString()+dd;            
+				"* $"+String.format("%,.2f",super.getBalance())+"*"+(super.getDate()).toString()+dd;            
 		
 	}
 

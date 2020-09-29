@@ -29,7 +29,7 @@ public class Savings extends Account{
 		String loyal = (isLoyal)?"*special Savings account*":"";
 		
 		return "*Savings*"+(super.getHolder()).getfname()+" "+(super.getHolder()).getlname()+
-				"* $"+String.format("%.2f",super.getBalance())+"*"+(super.getDate()).toString()+loyal;            
+				"* $"+String.format("%,.2f",super.getBalance())+"*"+(super.getDate()).toString()+loyal;            
 		
 	}
 	

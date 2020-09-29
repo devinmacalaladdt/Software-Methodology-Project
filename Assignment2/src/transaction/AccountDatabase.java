@@ -147,11 +147,12 @@ public class AccountDatabase {
 				
 				System.out.println();
 				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%.2f",(a.monthlyInterest()*a.getBalance())/12));
-				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
+				System.out.println("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12));
+				System.out.println("-fee: $ " + String.format("%,.2f",a.monthlyFee()));
+				double lastBalance = a.getBalance();
 				a.debit(a.monthlyFee());
-				a.credit((a.monthlyInterest()*a.getBalance())/12);
-				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
+				a.credit((a.monthlyInterest()*lastBalance)/12.00);
+				System.out.println("-new balance: $ " + String.format("%,.2f",a.getBalance()));
 				
 			}
 			
@@ -171,11 +172,12 @@ public class AccountDatabase {
 				
 				System.out.println();
 				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%.2f",(a.monthlyInterest()*a.getBalance())/12));
-				System.out.println("-fee: $ " + String.format("%.2f",a.monthlyFee()));
+				System.out.println("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12));
+				System.out.println("-fee: $ " + String.format("%,.2f",a.monthlyFee()));
+				double lastBalance = a.getBalance();
 				a.debit(a.monthlyFee());
-				a.credit((a.monthlyInterest()*a.getBalance())/12);
-				System.out.println("-new balance: $ " + String.format("%.2f",a.getBalance()));
+				a.credit((a.monthlyInterest()*lastBalance)/12.00);
+				System.out.println("-new balance: $ " + String.format("%,.2f",a.getBalance()));
 				
 			}
 			
