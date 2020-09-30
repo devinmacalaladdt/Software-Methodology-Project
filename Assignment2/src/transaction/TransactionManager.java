@@ -4,8 +4,18 @@ package transaction;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+
+/**
+ * Class to handle incoming commands, print output, and handle any errors
+ * @author Devin Macalalad, David Gasperini
+ */
 public class TransactionManager {
 
+	/**
+	 * Handles I/O, both accepting commands and calling necessary methods as well as
+	 * printing results of them. Also handles bad input via InputMismatch and invalid commands.
+	 * Continuously accepts commands until given Q command
+	 */
 	public void run() {
 		
 		System.out.println("Transaction processing starts.....");
@@ -32,13 +42,13 @@ public class TransactionManager {
 			
 			if(!valid_command) {
 				
-				System.out.println("Command "+"\'"+line[0]+"\' not supported!");
+				System.out.println("Command "+"\'" + line[0] + "\' not supported!");
 				line = (in.nextLine()).split("[ \t\n]");
 				continue;
 			
 			}
 			
-			if(line.length>5 && !line[5].equalsIgnoreCase("true") && !line[5].equalsIgnoreCase("false")) {
+			if(line.length > 5 && !line[5].equalsIgnoreCase("true") && !line[5].equalsIgnoreCase("false")) {
 				
 				System.out.println("Input data type mismatch.");
 				line = (in.nextLine()).split("[ \t\n]");
@@ -72,7 +82,7 @@ public class TransactionManager {
 					Date dateOpen = new Date(line[4]);
 					if(!dateOpen.isValid()) {
 						
-						System.out.println(line[4]+" is not a valid date!");
+						System.out.println(line[4] + " is not a valid date!");
 						line = (in.nextLine()).split("[ \t\n]");
 						continue;
 						
@@ -242,13 +252,13 @@ public class TransactionManager {
 							
 							Account withdrawalChecking = new Checking(ownerWithdrawal,0,new Date(""),false);
 							int resultChecking = account_db.withdrawal(withdrawalChecking, Double.parseDouble(line[3]));
-							if(resultChecking==1) {
+							if(resultChecking == 1) {
 								
 								System.out.println("Insufficient funds.");
 								line = (in.nextLine()).split("[ \t\n]");
 								continue;
 								
-							}else if(resultChecking==-1) {
+							}else if(resultChecking == -1) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -262,13 +272,13 @@ public class TransactionManager {
 							
 							Account withdrawalSavings = new Savings(ownerWithdrawal,0,new Date(""),false);
 							int resultSavings = account_db.withdrawal(withdrawalSavings, Double.parseDouble(line[3]));
-							if(resultSavings==1) {
+							if(resultSavings == 1) {
 								
 								System.out.println("Insufficient funds.");
 								line = (in.nextLine()).split("[ \t\n]");
 								continue;
 								
-							}else if(resultSavings==-1) {
+							}else if(resultSavings == -1) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -282,13 +292,13 @@ public class TransactionManager {
 							
 							Account withdrawalMoneyMarket = new MoneyMarket(ownerWithdrawal,0,new Date(""));
 							int resultMoneyMarket = account_db.withdrawal(withdrawalMoneyMarket, Double.parseDouble(line[3]));
-							if(resultMoneyMarket==1) {
+							if(resultMoneyMarket == 1) {
 								
 								System.out.println("Insufficient funds.");
 								line = (in.nextLine()).split("[ \t\n]");
 								continue;
 								
-							}else if(resultMoneyMarket==-1) {
+							}else if(resultMoneyMarket == -1) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -307,7 +317,7 @@ public class TransactionManager {
 				//Case for printing accounts
 				case 'P':
 					
-					if(account_db.getSize()==0) {
+					if(account_db.getSize() == 0) {
 						
 						System.out.println("Database is empty.");
 						line = (in.nextLine()).split("[ \t\n]");

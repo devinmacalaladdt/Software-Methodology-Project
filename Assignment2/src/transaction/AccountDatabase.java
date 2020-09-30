@@ -1,11 +1,21 @@
 package transaction;
 
+
+
+/**
+ * Representation of an Account Database including list of accounts, increment value, size and necessary methods
+ * @author Devin Macalalad, David Gasperini
+ */
 public class AccountDatabase {
 	private Account[] accounts;
 	private static final int increment = 5;
 	private int size;
 	
 	
+	/**
+	 * Constructor for Account Database
+	 * @param initialCapacity : initial capacity of accounts list
+	 */
 	public AccountDatabase(int initialCapacity) {
 		
 		accounts = new Account[initialCapacity];
@@ -16,8 +26,7 @@ public class AccountDatabase {
 	/**
 	 * Find the account and return its account index if found
 	 * @param account : account to search for in accounts
-	 * @return index : index of the match
-	 * @return -1 : account not found
+	 * @return int : index if index of the match, -1 if account not found
 	 */
 	private int find(Account account) 
 	{
@@ -43,8 +52,7 @@ public class AccountDatabase {
 	/**
 	 * Add a new account to the database
 	 * @param account : adds a new account to the database
-	 * @return true : account added successfully
-	 * @return false : account already exists
+	 * @return boolean : true if account added successfully, false if account already exists
 	 */
 	public boolean add(Account account)
 	{
@@ -60,8 +68,7 @@ public class AccountDatabase {
 	/**
 	 * removes an account from the database
 	 * @param account : account to remove
-	 * @return true : removed successfully
-	 * @return false : account not found
+	 * @return boolean : true if removed successfully, false if account not found
 	 */
 	public boolean remove(Account account)
 	{
@@ -82,8 +89,7 @@ public class AccountDatabase {
 	 * deposit funds to account
 	 * @param account : account to deposit into
 	 * @param amount : quantity to deposit
-	 * @return true : success
-	 * @return false : account not found
+	 * @return boolean : true if success, false if account not found
 	 */
 	public boolean deposit(Account account, double amount) 
 	{
@@ -98,9 +104,7 @@ public class AccountDatabase {
 	 * withdrawal funds from account 
 	 * @param account : account to withdrawal from
 	 * @param amount : quantity to withdrawal
-	 * @return 1 : insufficient balance
-	 * @return -1 : account not found
-	 * @return 0 : success
+	 * @return int : 1 if insufficient balance, -1 if account not found, 0 if success
 	 */
 	public int withdrawal(Account account, double amount)
 	{
@@ -136,14 +140,14 @@ public class AccountDatabase {
 	
 	/**
 	 * Sorts the account database by date opened
-	 * prints accounts
+	 * prints accounts and relevant information, then changes balance according to fee and interest
 	 */
 	public void printByDateOpen()
 	{
 		sortByDateOpen();
 		for(Account a: accounts) {
 			
-			if(a!=null) {
+			if(a != null) {
 				
 				System.out.println();
 				System.out.println(a.toString());
@@ -161,14 +165,14 @@ public class AccountDatabase {
 	
 	/**
 	 * Sorts the account database by holder's last name
-	 * prints accounts
+	 * prints accounts and relevant information, then changes balance according to fee and interest
 	 */
 	public void printByLastName()
 	{
 		sortByLastName();
 		for(Account a: accounts) {
 			
-			if(a!=null) {
+			if(a != null) {
 				
 				System.out.println();
 				System.out.println(a.toString());
@@ -191,7 +195,7 @@ public class AccountDatabase {
 	{
 		for(Account a:accounts) {
 			
-			if(a!=null) {
+			if(a != null) {
 				
 				System.out.println(a.toString());
 				
@@ -201,6 +205,10 @@ public class AccountDatabase {
 			
 	}
 	
+	/**
+	 * accessor for size
+	 * @return size : size of list of accounts
+	 */
 	public int getSize() {
 		
 		return size;

@@ -1,10 +1,20 @@
 package transaction;
 
+
+/**
+ * Representation of Profile including first name, last name and necessary methods
+ * @author Devin Macalalad, David Gasperini
+ */
 public class Profile {
 
 	private String fname;
 	private String lname;
 	
+	/**
+	 * Constructor for profile
+	 * @param fname : first name of account holder
+	 * @param lname : last name of account holder
+	 */
 	public Profile(String fname, String lname) {
 		
 		this.fname = fname;
@@ -21,6 +31,10 @@ public class Profile {
 		return lname;
 	}
 	
+	/**
+	 * accessor for last name
+	 * @return fname: first name of holder
+	 */
 	public String getfname() {
 		
 		return fname;
@@ -30,12 +44,10 @@ public class Profile {
 	/**
 	 * compares two holder last names for sorting purposes in AccountDatabase
 	 * @param holder : Profile to compare
-	 * @return 1 : If parameter is less 
-	 * @return -1 : If parameter is greater
-	 * @return 0 : If equal
+	 * @return int : 1 if If parameter is less , -1 if If parameter is greater, 0 if equal
 	 * */
 	public int compareTo(Profile holder) {
-		// TODO Auto-generated method stub
+
 		if(lname.toLowerCase().equals(holder.getlname().toLowerCase()))
 				return 0;
 		for(int x = 0; x < lname.length(); x++) {
