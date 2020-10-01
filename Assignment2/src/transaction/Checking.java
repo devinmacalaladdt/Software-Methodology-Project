@@ -20,9 +20,7 @@ public class Checking extends Account{
 	 */
 	public Checking(Profile holder, double balance, Date dateOpen, boolean directDeposit) {
 		
-		super.setHolder(holder);
-		super.setBalance(balance);
-		super.setDateOpen(dateOpen);
+		super(holder,balance,dateOpen);
 		this.directDeposit = directDeposit;
 		
 	}

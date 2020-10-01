@@ -9,7 +9,19 @@ public abstract class Account {
 	private double balance;
 	private Date dateOpen;
 	
-	
+	/**
+	 * Constructor for Account
+	 * @param holder : Profile of the account holder
+	 * @param balance : initial balance of the account
+	 * @param dateOpen : Date that account was opened
+	 */
+	public Account(Profile holder, double balance, Date dateOpen) {
+		
+		this.holder = holder;
+		this.balance = balance;
+		this.dateOpen = dateOpen;
+		
+	}
 	/**
 	 * Removes amount from the holder's balance
 	 * @param amount : quantity to debit
@@ -55,35 +67,6 @@ public abstract class Account {
 		return holder;
 	}
 	
-	/**
-	 * mutator for the holder
-	 * @param holder : new Profile to set holder to
-	 */
-	public void setHolder(Profile holder) {
-		
-		this.holder = holder;
-		
-	}
-	
-	/**
-	 * mutator for the balance
-	 * @param balance : new double to set balance to
-	 */
-	public void setBalance(double balance) {
-		
-		this.balance = balance;
-		
-	}
-	
-	/**
-	 * mutator for the dateOpen
-	 * @param dateOpen : new Date to set dateOpen to
-	 */
-	public void setDateOpen(Date dateOpen) {
-		
-		this.dateOpen = dateOpen;
-		
-	}
 	
 	
 	/**

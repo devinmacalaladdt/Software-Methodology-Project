@@ -18,9 +18,7 @@ public class MoneyMarket extends Account{
 	 */
 	public MoneyMarket(Profile holder, double balance, Date dateOpen) {
 		
-		super.setHolder(holder);
-		super.setBalance(balance);
-		super.setDateOpen(dateOpen);
+		super(holder,balance,dateOpen);
 		withdrawals = 0;
 		
 	}

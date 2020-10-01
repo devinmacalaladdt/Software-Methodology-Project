@@ -20,9 +20,7 @@ public class Savings extends Account{
 	 */
 	public Savings(Profile holder, double balance, Date dateOpen, boolean isLoyal) {
 		
-		super.setHolder(holder);
-		super.setBalance(balance);
-		super.setDateOpen(dateOpen);
+		super(holder,balance,dateOpen);
 		this.isLoyal = isLoyal;
 		
 	}

@@ -88,16 +88,12 @@ public class TransactionManager {
 						
 					}
 					
-					//Construct new Profile
-					Profile ownerOpen = new Profile(line[1],line[2]);
-					
-					
 					switch(line[0].charAt(1)) {
 					
 						case 'C':
 							
-							Account newChecking = new Checking(ownerOpen,Double.parseDouble(line[3]),dateOpen,Boolean.parseBoolean(line[5]));
-							if(!account_db.add(newChecking)) {
+							if(!account_db.add(new Checking(new Profile(line[1],line[2]),
+									Double.parseDouble(line[3]),dateOpen,Boolean.parseBoolean(line[5])))) {
 								
 								System.out.println("Account is already in the database.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -109,8 +105,8 @@ public class TransactionManager {
 							
 						case 'S':
 							
-							Account newSavings = new Savings(ownerOpen,Double.parseDouble(line[3]),dateOpen,Boolean.parseBoolean(line[5]));
-							if(!account_db.add(newSavings)) {
+							if(!account_db.add(new Savings(new Profile(line[1],line[2]),
+									Double.parseDouble(line[3]),dateOpen,Boolean.parseBoolean(line[5])))) {
 								
 								System.out.println("Account is already in the database.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -122,8 +118,8 @@ public class TransactionManager {
 							
 						case 'M':
 							
-							Account newMoneyMarket = new MoneyMarket(ownerOpen,Double.parseDouble(line[3]),dateOpen);
-							if(!account_db.add(newMoneyMarket)) {
+							if(!account_db.add(new MoneyMarket(new Profile(line[1],line[2]),
+									Double.parseDouble(line[3]),dateOpen))) {
 								
 								System.out.println("Account is already in the database.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -142,16 +138,11 @@ public class TransactionManager {
 				//Case for closing an account
 				case 'C':
 					
-					
-					//Construct old Profile
-					Profile ownerClose = new Profile(line[1],line[2]);
-					
 					switch(line[0].charAt(1)) {
 					
 						case 'C':
 							
-							Account oldChecking = new Checking(ownerClose,0,new Date(""),false);
-							if(!account_db.remove(oldChecking)) {
+							if(!account_db.remove(new Checking(new Profile(line[1],line[2]),0,new Date(""),false))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -162,8 +153,7 @@ public class TransactionManager {
 							
 						case 'S':
 							
-							Account oldSavings = new Savings(ownerClose,0,new Date(""),false);
-							if(!account_db.remove(oldSavings)) {
+							if(!account_db.remove(new Savings(new Profile(line[1],line[2]),0,new Date(""),false))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -174,8 +164,7 @@ public class TransactionManager {
 							
 						case 'M':
 							
-							Account oldMoneyMarket = new MoneyMarket(ownerClose,0,new Date(""));
-							if(!account_db.remove(oldMoneyMarket)) {
+							if(!account_db.remove(new MoneyMarket(new Profile(line[1],line[2]),0,new Date("")))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -193,15 +182,12 @@ public class TransactionManager {
 				//Case for depositing into an account
 				case 'D':
 					
-					//Construct existing profile
-					Profile ownerDeposit = new Profile(line[1],line[2]);
-					
 					switch(line[0].charAt(1)) {
 					
 						case 'C':
 							
-							Account depositChecking = new Checking(ownerDeposit,0,new Date(""),false);
-							if(!account_db.deposit(depositChecking,Double.parseDouble(line[3]))) {
+							if(!account_db.deposit(new Checking(new Profile(line[1],line[2]),0,
+									new Date(""),false),Double.parseDouble(line[3]))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -212,8 +198,8 @@ public class TransactionManager {
 							
 						case 'S':
 							
-							Account depositSavings = new Savings(ownerDeposit,0,new Date(""),false);
-							if(!account_db.deposit(depositSavings,Double.parseDouble(line[3]))) {
+							if(!account_db.deposit(new Savings(new Profile(line[1],line[2]),0,
+									new Date(""),false),Double.parseDouble(line[3]))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -224,8 +210,8 @@ public class TransactionManager {
 							
 						case 'M':
 							
-							Account depositMoneyMarket = new MoneyMarket(ownerDeposit,0,new Date(""));
-							if(!account_db.deposit(depositMoneyMarket,Double.parseDouble(line[3]))) {
+							if(!account_db.deposit(new MoneyMarket(new Profile(line[1],line[2]),0,
+									new Date("")),Double.parseDouble(line[3]))) {
 								
 								System.out.println("Account does not exist.");
 								line = (in.nextLine()).split("[ \t\n]");
@@ -243,15 +229,12 @@ public class TransactionManager {
 				//Case for withdrawing from an account
 				case 'W':
 					
-					//Construct existing profile
-					Profile ownerWithdrawal = new Profile(line[1],line[2]);
-					
 					switch(line[0].charAt(1)) {
 					
 						case 'C':
 							
-							Account withdrawalChecking = new Checking(ownerWithdrawal,0,new Date(""),false);
-							int resultChecking = account_db.withdrawal(withdrawalChecking, Double.parseDouble(line[3]));
+							int resultChecking = account_db.withdrawal(new Checking(new Profile(line[1],line[2]),
+									0,new Date(""),false), Double.parseDouble(line[3]));
 							if(resultChecking == 1) {
 								
 								System.out.println("Insufficient funds.");
@@ -270,8 +253,8 @@ public class TransactionManager {
 							
 						case 'S':
 							
-							Account withdrawalSavings = new Savings(ownerWithdrawal,0,new Date(""),false);
-							int resultSavings = account_db.withdrawal(withdrawalSavings, Double.parseDouble(line[3]));
+							int resultSavings = account_db.withdrawal(new Savings(new Profile(line[1],line[2]),
+									0,new Date(""),false), Double.parseDouble(line[3]));
 							if(resultSavings == 1) {
 								
 								System.out.println("Insufficient funds.");
@@ -290,8 +273,8 @@ public class TransactionManager {
 							
 						case 'M':
 							
-							Account withdrawalMoneyMarket = new MoneyMarket(ownerWithdrawal,0,new Date(""));
-							int resultMoneyMarket = account_db.withdrawal(withdrawalMoneyMarket, Double.parseDouble(line[3]));
+							int resultMoneyMarket = account_db.withdrawal(new MoneyMarket(new Profile(line[1],line[2]),
+									0,new Date("")), Double.parseDouble(line[3]));
 							if(resultMoneyMarket == 1) {
 								
 								System.out.println("Insufficient funds.");
