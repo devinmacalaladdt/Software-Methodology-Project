@@ -20,9 +20,12 @@ public class Date implements Comparable<Date>{
 		String[] dates = date.split("[/]");
 		if(dates.length==3) {
 			
-			month = Integer.parseInt(dates[0]);
-			day = Integer.parseInt(dates[1]);
-			year = Integer.parseInt(dates[2]);
+			try{month = Integer.parseInt(dates[0]);}
+			catch(NumberFormatException nfe_month) {month=0;}
+			try{day = Integer.parseInt(dates[1]);}
+			catch(NumberFormatException nfe_day) {day=0;}
+			try{year = Integer.parseInt(dates[2]);}
+			catch(NumberFormatException nfe_year) {year=0000;}
 			
 		}
 		

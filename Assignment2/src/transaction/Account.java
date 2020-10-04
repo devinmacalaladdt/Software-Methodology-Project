@@ -19,6 +19,8 @@ public abstract class Account {
 		
 		this.holder = holder;
 		this.balance = balance;
+		if(balance < 0)
+			this.balance = 0;
 		this.dateOpen = dateOpen;
 		
 	}
