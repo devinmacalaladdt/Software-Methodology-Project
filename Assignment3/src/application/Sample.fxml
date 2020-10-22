@@ -8,17 +8,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
-   <center>
-      <TabPane prefHeight="137.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Print/File Input">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <TabPane prefHeight="150.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Print/File Input">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="108.0" prefWidth="604.0">
                      <children>
                         <VBox layoutX="79.0" layoutY="14.0" prefHeight="91.0" prefWidth="100.0">
                            <children>
@@ -27,17 +27,18 @@
                               <Button fx:id="by_date_open" mnemonicParsing="false" onAction="#by_date_open_action" text="by Date Open" />
                            </children>
                         </VBox>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Open/Close">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-          <Tab text="Deposit/Withdrawl">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Open/Close">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Deposit/Withdrawl">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <VBox layoutX="61.0" layoutY="12.0" prefHeight="84.0" prefWidth="254.0">
                            <children>
@@ -52,17 +53,13 @@
                               <Button fx:id="withdrawal_button" mnemonicParsing="false" onAction="#withdrawal_action" text="Withdrawal" />
                            </children>
                         </HBox>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
       </TabPane>
-   </center>
-   <top>
-      <TextArea fx:id="display" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </top>
-   <left>
-      <VBox prefHeight="76.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="50.0" prefWidth="100.0">
          <children>
             <RadioButton fx:id="savings" mnemonicParsing="false" text="Savings">
                <toggleGroup>
@@ -73,5 +70,6 @@
             <RadioButton fx:id="money_market" mnemonicParsing="false" text="Money Market" toggleGroup="$account_type" />
          </children>
       </VBox>
-   </left>
-</BorderPane>
+      <TextArea fx:id="display" editable="false" prefHeight="150.0" prefWidth="700.0" wrapText="true" />
+   </children>
+</FlowPane>
