@@ -71,6 +71,7 @@ public class MoneyMarket extends Account{
 		
 	}
 	
+	
 	/**
 	 * equals method to compare current instance of money market to another
 	 * @param account : account to compare to the current instance

@@ -64,6 +64,7 @@ public class Checking extends Account{
 		
 	}
 
+
 	/**
 	 * equals method to compare current instance of checking to another
 	 * @param account : account to compare to the current instance
