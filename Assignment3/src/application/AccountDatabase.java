@@ -1,6 +1,6 @@
 package application;
 
-
+import javafx.scene.control.TextArea;
 
 /**
  * Representation of an Account Database including list of accounts, increment value, size and necessary methods
@@ -142,21 +142,21 @@ public class AccountDatabase {
 	 * Sorts the account database by date opened
 	 * prints accounts and relevant information, then changes balance according to fee and interest
 	 */
-	public void printByDateOpen()
+	public void printByDateOpen(TextArea display)
 	{
 		sortByDateOpen();
 		for(Account a: accounts) {
 			
 			if(a != null) {
 				
-				System.out.println();
-				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12));
-				System.out.println("-fee: $ " + String.format("%,.2f",a.monthlyFee()));
+				display.appendText("\n");
+				display.appendText(a.toString()+"\n");
+				display.appendText("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12)+"\n");
+				display.appendText("-fee: $ " + String.format("%,.2f",a.monthlyFee())+"\n");
 				double lastBalance = a.getBalance();
 				a.debit(a.monthlyFee());
 				a.credit((a.monthlyInterest()*lastBalance)/12.00);
-				System.out.println("-new balance: $ " + String.format("%,.2f",a.getBalance()));
+				display.appendText("-new balance: $ " + String.format("%,.2f",a.getBalance())+"\n");
 				
 			}
 			
@@ -167,21 +167,21 @@ public class AccountDatabase {
 	 * Sorts the account database by holder's last name
 	 * prints accounts and relevant information, then changes balance according to fee and interest
 	 */
-	public void printByLastName()
+	public void printByLastName(TextArea display)
 	{
 		sortByLastName();
 		for(Account a: accounts) {
 			
 			if(a != null) {
 				
-				System.out.println();
-				System.out.println(a.toString());
-				System.out.println("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12));
-				System.out.println("-fee: $ " + String.format("%,.2f",a.monthlyFee()));
+				display.appendText("\n");
+				display.appendText(a.toString()+"\n");
+				display.appendText("-interest: $ " + String.format("%,.2f",(a.monthlyInterest()*a.getBalance())/12)+"\n");
+				display.appendText("-fee: $ " + String.format("%,.2f",a.monthlyFee())+"\n");
 				double lastBalance = a.getBalance();
 				a.debit(a.monthlyFee());
 				a.credit((a.monthlyInterest()*lastBalance)/12.00);
-				System.out.println("-new balance: $ " + String.format("%,.2f",a.getBalance()));
+				display.appendText("-new balance: $ " + String.format("%,.2f",a.getBalance())+"\n");
 				
 			}
 			
@@ -191,13 +191,13 @@ public class AccountDatabase {
 	/**
 	 * prints accounts
 	 */
-	public void printAccounts()
+	public void printAccounts(TextArea display)
 	{
 		for(Account a:accounts) {
 			
 			if(a != null) {
 				
-				System.out.println(a.toString());
+				display.appendText(a.toString()+"\n");
 				
 			}
 			

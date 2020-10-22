@@ -18,7 +18,16 @@
         <tabs>
           <Tab text="Print/File Input">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="79.0" layoutY="14.0" prefHeight="91.0" prefWidth="100.0">
+                           <children>
+                              <Button fx:id="print_accounts" mnemonicParsing="false" onAction="#print_accounts_action" text="Print Accounts" />
+                              <Button fx:id="by_last_name" mnemonicParsing="false" onAction="#by_last_name_action" text="by Last Name" />
+                              <Button fx:id="by_date_open" mnemonicParsing="false" onAction="#by_date_open_action" text="by Date Open" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab text="Open/Close">
