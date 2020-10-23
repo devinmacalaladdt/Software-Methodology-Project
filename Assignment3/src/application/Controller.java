@@ -161,6 +161,13 @@ public class Controller {
 	
 	public void print_accounts_action() {
 		
+		if(account_db.getSize() == 0) {
+			
+			display.appendText("Database is empty."+"\n");
+			return;
+			
+		}
+		
 		display.appendText("--Listing accounts in the database--"+"\n");
 		account_db.printAccounts(display);
 		display.appendText("--end of listing--"+"\n");
@@ -169,6 +176,13 @@ public class Controller {
 	
 	public void by_last_name_action() {
 		
+		if(account_db.getSize() == 0) {
+			
+			display.appendText("Database is empty."+"\n");
+			return;
+			
+		}
+		
 		display.appendText("--Printing statements by last name--"+"\n");
 		account_db.printByLastName(display);
 		display.appendText("--end of listing--"+"\n");
@@ -176,6 +190,13 @@ public class Controller {
 	}
 	
 	public void by_date_open_action() {
+		
+		if(account_db.getSize() == 0) {
+			
+			display.appendText("Database is empty."+"\n");
+			return;
+			
+		}
 		
 		display.appendText("--Printing statements by date opened--"+"\n");
 		account_db.printByDateOpen(display);
@@ -187,14 +208,6 @@ public class Controller {
 		
 		this.display_string = "";
 		this.account_db = new AccountDatabase(5);
-//		account_db.add(new Savings(new Profile("a","b"),500,
-//					new Date("1/21/2019"),false));
-//		account_db.add(new Checking(new Profile("a","b"),20,
-//				new Date("1/22/2019"),true));
-//		account_db.add(new Savings(new Profile("c","d"),1764.56,
-//				new Date("1/21/2005"),false));
-//		account_db.add(new MoneyMarket(new Profile("jim","a"),9,
-//				new Date("4/21/2005")));
 		
 	}
 	
