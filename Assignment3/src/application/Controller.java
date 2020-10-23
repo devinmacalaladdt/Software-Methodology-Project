@@ -32,14 +32,15 @@ public class Controller {
 	private Button btnFileOut;
 	
 	private String display_string;
-	@FXML
-	private RadioButton savings;
-	@FXML
-	private RadioButton checking;
-	@FXML
-	private RadioButton money_market;
 	
 	//deposit/withdrawal tab
+	
+	@FXML
+	private RadioButton depowith_savings;
+	@FXML
+	private RadioButton depowith_checking;
+	@FXML
+	private RadioButton depowith_money_market;
 	@FXML
 	private Button deposit_button;
 	@FXML
@@ -64,7 +65,7 @@ public class Controller {
 			
 		}
 		
-		if(savings.isSelected()) {
+		if(depowith_savings.isSelected()) {
 
 			if(!account_db.deposit(new Savings(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),0,
 					new Date(""),false),Double.parseDouble(depowith_amount.getText()))) {
@@ -72,7 +73,7 @@ public class Controller {
 				return;
 			}
 			
-		}else if(checking.isSelected()) {
+		}else if(depowith_checking.isSelected()) {
 			
 			if(!account_db.deposit(new Checking(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),0,
 					new Date(""),false),Double.parseDouble(depowith_amount.getText()))) {
@@ -80,7 +81,7 @@ public class Controller {
 				return;
 			}
 			
-		}else if (money_market.isSelected()){
+		}else if (depowith_money_market.isSelected()){
 			
 			if(!account_db.deposit(new MoneyMarket(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),0,
 					new Date("")),Double.parseDouble(depowith_amount.getText()))) {
@@ -112,7 +113,7 @@ public class Controller {
 			
 		}
 		
-		if(savings.isSelected()) {
+		if(depowith_savings.isSelected()) {
 			
 			int resultChecking = account_db.withdrawal(new Savings(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),
 					0,new Date(""),false), Double.parseDouble(depowith_amount.getText()));
@@ -128,7 +129,7 @@ public class Controller {
 				
 			}
 			
-		}else if(checking.isSelected()) {
+		}else if(depowith_checking.isSelected()) {
 			
 			int resultChecking = account_db.withdrawal(new Checking(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),
 					0,new Date(""),false), Double.parseDouble(depowith_amount.getText()));
@@ -144,7 +145,7 @@ public class Controller {
 				
 			}
 			
-		}else if(money_market.isSelected()) {
+		}else if(depowith_money_market.isSelected()) {
 			
 			int resultChecking = account_db.withdrawal(new MoneyMarket(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),
 					0,new Date("")), Double.parseDouble(depowith_amount.getText()));
@@ -174,17 +175,28 @@ public class Controller {
 	//print/file input tab
 	
 	@FXML
-	private Button print_accounts;
-	@FXML
-	private Button by_last_name;
-	@FXML
-	private Button by_date_open;
+	private ComboBox<String> print_accounts;
 	
 	public void print_accounts_action() {
+		
+		if(print_accounts.getValue().equals("By Last Name")) {
+			
+			by_last_name_action();
+			print_accounts.getSelectionModel().clearSelection();
+			return;
+			
+		}else if(print_accounts.getValue().equals("By Date Open")){
+			
+			by_date_open_action();
+			print_accounts.getSelectionModel().clearSelection();
+			return;
+			
+		}
 		
 		if(account_db.getSize() == 0) {
 			
 			display.appendText("Database is empty."+"\n");
+			print_accounts.getSelectionModel().clearSelection();
 			return;
 			
 		}
@@ -192,6 +204,7 @@ public class Controller {
 		display.appendText("--Listing accounts in the database--"+"\n");
 		account_db.printAccounts(display);
 		display.appendText("--end of listing--"+"\n");
+		print_accounts.getSelectionModel().clearSelection();
 		
 	}
 	
@@ -271,6 +284,8 @@ public class Controller {
 		catch(IOException ioe) {
 			display.appendText("IO Exception has occured, check the file name\n");
 		}
+		
+		display.appendText("Imported File\n");
 	}
 	
 	public void btnFileOut_action() {
@@ -290,6 +305,7 @@ public class Controller {
 		catch(IOException ioe) {
 			display.appendText("IO Exception has occured, check the file name\n");
 		}
+		display.appendText("Exported File\n");
 	}
 	
 	public Controller() {
