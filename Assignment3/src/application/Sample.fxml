@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -22,11 +23,17 @@
                      <children>
                         <VBox layoutX="79.0" layoutY="14.0" prefHeight="91.0" prefWidth="100.0">
                            <children>
-                              <Button fx:id="print_accounts" mnemonicParsing="false" onAction="#print_accounts_action" text="Print Accounts" />
-                              <Button fx:id="by_last_name" mnemonicParsing="false" onAction="#by_last_name_action" text="by Last Name" />
-                              <Button fx:id="by_date_open" mnemonicParsing="false" onAction="#by_date_open_action" text="by Date Open" />
+                              <Button fx:id="print_accounts" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#print_accounts_action" prefHeight="25.0" prefWidth="100.0" text="Print Accounts" />
+                              <Button fx:id="by_last_name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#by_last_name_action" prefHeight="25.0" prefWidth="100.0" text="by Last Name" />
+                              <Button fx:id="by_date_open" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#by_date_open_action" prefHeight="25.0" prefWidth="100.0" text="by Date Open" />
                            </children>
                         </VBox>
+                        <TextArea fx:id="txtFile" layoutX="442.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" text="database.txt" wrapText="true" />
+                        <Label layoutX="305.0" layoutY="22.0" text="Enter database filename:" />
+                        <Button fx:id="btnFileOpen" layoutX="630.0" layoutY="18.0" mnemonicParsing="false" onAction="#btnFileOpen_action" text="Import" />
+                        <Label layoutX="317.0" layoutY="52.0" text="Enter output filename:" />
+                        <TextArea fx:id="txtFileOut" layoutX="442.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" text="database.txt" wrapText="true" />
+                        <Button fx:id="btnFileOut" layoutX="630.0" layoutY="47.0" mnemonicParsing="false" onAction="#btnFileOut_action" text="Export" />
                      </children>
                   </AnchorPane>
                </content>

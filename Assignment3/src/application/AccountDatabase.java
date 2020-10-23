@@ -216,6 +216,34 @@ public class AccountDatabase {
 	}
 	
 	/**
+	 * Package accounts database for storage
+	 * @return String : formatted string of all account entries
+	 */
+	public String formatDatabaseForStorage() {
+		String ret = "";
+		for(int x = 0; x < size; x++) {
+			ret += accounts[x].getClass().getSimpleName().charAt(0) + "," + accounts[x].getHolder().getfname() + "," + accounts[x].getHolder().getlname() +
+					"," + accounts[x].getBalance() + "," + accounts[x].getDate() + ",";
+			if(accounts[x].toString().charAt(accounts[x].toString().length()-1)!='*') {
+				ret += "false";
+			}
+			else {
+				if(accounts[x].toString().substring(1+accounts[x].toString().substring(0,accounts[x].toString().length()-1).lastIndexOf('*'),accounts[x].toString().length()-1).equals("special Savings account") ||
+						accounts[x].toString().substring(1+accounts[x].toString().substring(0,accounts[x].toString().length()-1).lastIndexOf('*'),accounts[x].toString().length()-1).equals("direct deposit account")) {
+					ret += "true";
+				}
+				else {
+					String withdrawals = accounts[x].toString().substring(1+accounts[x].toString().substring(0,accounts[x].toString().length()-1).lastIndexOf('*'),accounts[x].toString().length()-1);
+					withdrawals = withdrawals.substring(0, withdrawals.indexOf(' '));
+					ret += withdrawals;
+				}
+			}
+			ret += "\n";
+		}
+		return ret;
+	}
+	
+	/**
 	 * Helper method to perform the sorting for sortByDate and sortByLastName
 	 * @param byDate : if true sorts by date opened, if false sorts by holders last name
 	 */

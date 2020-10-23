@@ -1,5 +1,17 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.StringTokenizer;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -10,6 +22,15 @@ public class Controller {
 	AccountDatabase account_db;
 	@FXML
 	private TextArea display;
+	@FXML
+	private TextArea txtFile;
+	@FXML
+	private Button btnFileOpen;
+	@FXML
+	private TextArea txtFileOut;
+	@FXML
+	private Button btnFileOut;
+	
 	private String display_string;
 	@FXML
 	private RadioButton savings;
@@ -202,6 +223,73 @@ public class Controller {
 		account_db.printByDateOpen(display);
 		display.appendText("--end of listing--"+"\n");
 		
+	}
+	
+	public void btnFileOpen_action() {
+		String path = txtFile.getText();
+		try{
+			File f = new File(path);
+			if(!f.exists()) {
+				display.appendText("File not found, check the file name\n");
+				return;
+			}
+			BufferedReader fin = new BufferedReader(new FileReader(path));
+			String s;
+			int line = 1;
+			while((s = fin.readLine()) != null) {
+				String tokens[] = s.split(",");
+				if(tokens.length != 6) {
+					display.appendText("Error parsing line " + line + "\n");
+					continue;
+				}
+				Profile holder = new Profile(tokens[1], tokens[2]);
+				Date date = new Date(tokens[4]);
+				Double balance=0.0;
+				try{balance = Double.parseDouble(tokens[3]);}
+				catch(NumberFormatException nfe) {display.appendText("Error parsing double in line " + line + "\n");}
+				if(tokens[0].equals("C")) {
+					boolean directDeposit = Boolean.parseBoolean(tokens[5]);
+					account_db.add(new Checking(holder, balance, date, directDeposit));
+				}
+				else if(tokens[0].equals("S")) {
+					boolean isLoyal = Boolean.parseBoolean(tokens[5]);
+					account_db.add(new Savings(holder, balance, date, isLoyal));
+				}
+				else if(tokens[0].equals("M")) {
+					int withdrawals = Integer.parseInt(tokens[5]);
+					MoneyMarket temp = new MoneyMarket(holder, balance, date);
+					for(int x = 0; x < withdrawals; x++)
+						temp.incrementWithdrawals();
+					account_db.add(temp);
+				}
+				else {
+					display.appendText("Error parsing line " + line + "\n");
+				}
+			}
+			fin.close();
+		}
+		catch(IOException ioe) {
+			display.appendText("IO Exception has occured, check the file name\n");
+		}
+	}
+	
+	public void btnFileOut_action() {
+		String path = txtFileOut.getText();
+		try{
+			File f = new File(path);
+			if(!f.exists()) {
+				display.appendText("File not found, creating new file.\n");
+				f.createNewFile();
+				return;
+			}
+			BufferedWriter fout = new BufferedWriter(new FileWriter(path));
+			String write = account_db.formatDatabaseForStorage();
+			fout.write(write);
+			fout.close();
+		}
+		catch(IOException ioe) {
+			display.appendText("IO Exception has occured, check the file name\n");
+		}
 	}
 	
 	public Controller() {
