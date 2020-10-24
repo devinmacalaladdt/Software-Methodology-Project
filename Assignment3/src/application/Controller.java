@@ -175,28 +175,19 @@ public class Controller {
 	//print/file input tab
 	
 	@FXML
-	private ComboBox<String> print_accounts;
+	private Button print_accounts;
+	@FXML
+	private Button by_last_name;
+	@FXML
+	private Button by_date_open;
+	
 	
 	public void print_accounts_action() {
-		
-		if(print_accounts.getValue().equals("By Last Name")) {
-			
-			by_last_name_action();
-			print_accounts.getSelectionModel().clearSelection();
-			return;
-			
-		}else if(print_accounts.getValue().equals("By Date Open")){
-			
-			by_date_open_action();
-			print_accounts.getSelectionModel().clearSelection();
-			return;
-			
-		}
 		
 		if(account_db.getSize() == 0) {
 			
 			display.appendText("Database is empty."+"\n");
-			print_accounts.getSelectionModel().clearSelection();
+
 			return;
 			
 		}
@@ -204,7 +195,7 @@ public class Controller {
 		display.appendText("--Listing accounts in the database--"+"\n");
 		account_db.printAccounts(display);
 		display.appendText("--end of listing--"+"\n");
-		print_accounts.getSelectionModel().clearSelection();
+
 		
 	}
 	
