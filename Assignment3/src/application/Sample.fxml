@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
@@ -12,6 +14,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <children>
@@ -48,7 +51,44 @@
             </Tab>
             <Tab text="Open/Close">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="700.0">
+                     <children>
+                        <VBox layoutX="35.0" layoutY="32.0" prefHeight="58.0" prefWidth="111.0">
+                           <children>
+                              <RadioButton fx:id="radOCSavings" mnemonicParsing="false" onAction="#isSavings_event" text="Savings">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="depowith_account_type1" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="radOCChecking" mnemonicParsing="false" onAction="#isChecking_event" text="Checking" toggleGroup="$depowith_account_type1" />
+                              <RadioButton fx:id="radOCMoneyMarket" mnemonicParsing="false" onAction="#isMoneyMarket_event" text="Money Market" toggleGroup="$depowith_account_type1" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="174.0" layoutY="19.0" prefHeight="84.0" prefWidth="254.0">
+                           <children>
+                              <TextField fx:id="txtOCFirstName" promptText="First Name" />
+                              <TextField fx:id="txtOCLastName" promptText="Last Name" />
+                              <TextField fx:id="txtOCAmount" promptText="Amount" />
+                           </children>
+                        </VBox>
+                        <CheckBox fx:id="chkbxOCIsLoyal" disable="true" layoutX="600.0" layoutY="55.0" mnemonicParsing="false" text="Loyalty" />
+                        <CheckBox fx:id="chkbxOCIsDirectDeposit" disable="true" layoutX="475.0" layoutY="55.0" mnemonicParsing="false" text="Direct Deposit" />
+                        <TextField fx:id="txtOCMonth" layoutX="480.0" layoutY="20.0" prefHeight="25.0" prefWidth="41.0" promptText="mm" />
+                        <TextField fx:id="txtOCYear" layoutX="590.0" layoutY="20.0" prefHeight="25.0" prefWidth="41.0" promptText="yyyy" />
+                        <TextField fx:id="txtOCDay" layoutX="535.0" layoutY="20.0" prefHeight="25.0" prefWidth="41.0" promptText="dd" />
+                        <Label layoutX="523.0" layoutY="20.0" text="/" textAlignment="CENTER">
+                           <font>
+                              <Font name="BolsterBold Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="578.0" layoutY="20.0" text="/" textAlignment="CENTER">
+                           <font>
+                              <Font name="BolsterBold Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnOCOpen" layoutX="475.0" layoutY="78.0" mnemonicParsing="false" onAction="#btnOCOpen_action" text="OPEN" />
+                        <Button fx:id="btnOCClose" layoutX="590.0" layoutY="78.0" mnemonicParsing="false" onAction="#btnOCClose_action" text="CLOSE" />
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Deposit/Withdrawl">
@@ -85,6 +125,9 @@
             </Tab>
          </tabs>
       </TabPane>
-      <TextArea fx:id="display" editable="false" prefHeight="150.0" prefWidth="700.0" wrapText="true" />
+      <TextArea fx:id="display" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="700.0" wrapText="true">
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis></TextArea>
    </children>
 </FlowPane>

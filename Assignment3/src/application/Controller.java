@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -51,6 +52,32 @@ public class Controller {
 	private TextField depowith_lastname;
 	@FXML
 	private TextField depowith_amount;
+	@FXML
+	private TextField txtOCFirstName;
+	@FXML
+	private TextField txtOCLastName;
+	@FXML
+	private TextField txtOCAmount;
+	@FXML
+	private TextField txtOCMonth;
+	@FXML
+	private TextField txtOCDay;
+	@FXML
+	private TextField txtOCYear;
+	@FXML
+	private RadioButton radOCSavings;
+	@FXML
+	private RadioButton radOCChecking;
+	@FXML
+	private RadioButton radOCMoneyMarket;
+	@FXML
+	private CheckBox chkbxOCIsLoyal;
+	@FXML
+	private CheckBox chkbxOCIsDirectDeposit;
+	@FXML
+	private Button btnOCOpen;
+	@FXML
+	private Button btnOCClose;
 
 	public void deposit_action() {
 		
@@ -170,6 +197,38 @@ public class Controller {
 		
 		display.appendText(String.format("%.2f",Double.parseDouble(depowith_amount.getText())) + " withdrawn from account."+ "\n");
 		
+	}
+	
+	//open / close tab
+	
+	public void btnOCOpen_action() {}
+	public void btnOCClose_action() {}
+	public void isSavings_event(ActionEvent event)
+	{
+		if(radOCSavings.isArmed()) {
+			chkbxOCIsDirectDeposit.setDisable(true);
+			chkbxOCIsLoyal.setDisable(false);
+			chkbxOCIsDirectDeposit.setSelected(false);
+			chkbxOCIsLoyal.setSelected(false);
+		}
+	}
+	public void isChecking_event(ActionEvent event)
+	{
+		if(radOCChecking.isArmed()) {
+			chkbxOCIsDirectDeposit.setDisable(false);
+			chkbxOCIsLoyal.setDisable(true);
+			chkbxOCIsDirectDeposit.setSelected(false);
+			chkbxOCIsLoyal.setSelected(false);
+		}
+	}
+	public void isMoneyMarket_event(ActionEvent event)
+	{
+		if(radOCMoneyMarket.isArmed()) {
+			chkbxOCIsDirectDeposit.setDisable(true);
+			chkbxOCIsLoyal.setDisable(true);
+			chkbxOCIsDirectDeposit.setSelected(false);
+			chkbxOCIsLoyal.setSelected(false);
+		}
 	}
 	
 	//print/file input tab
