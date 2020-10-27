@@ -215,8 +215,112 @@ public class Controller {
 	
 	//open / close tab
 	
-	public void btnOCOpen_action() {}
-	public void btnOCClose_action() {}
+	private Account parseAccountData() {
+		Profile holder;
+		String firstName = txtOCFirstName.getText();
+		String lastName = txtOCLastName.getText();
+		if((firstName != null && !firstName.equals("")) && (lastName != null && !lastName.equals("")))
+			holder = new Profile(firstName, lastName);
+		else {
+			display.appendText("Please enter your first and last name.\n");
+			return null;
+		}
+		String strAmount = txtOCAmount.getText();
+		double amount;
+		if(strAmount != null && !strAmount.equals("")) {
+			try {amount = Double.parseDouble(strAmount);}
+			catch (NumberFormatException nfe) {
+				display.appendText("An exception has occured while reading the amount.\n");
+				return null;
+			}
+		}
+		else {
+			display.appendText("Please ensure the amount is correct.\n");
+			return null;
+		}
+		Date date;
+		String month = txtOCMonth.getText(), day = txtOCDay.getText(), year = txtOCYear.getText();
+		if(month != null && day != null && year != null && !month.equals("") && !day.equals("") && !year.equals("") &&
+				month.length() < 3 && day.length() < 3 && year.length() < 5)
+			date = new Date(month+'/'+day+'/'+year);
+		else {
+			display.appendText("Please ensure the date is correct.\n");
+			return null;
+		}
+		if(!date.isValid()) {
+			display.appendText("Please ensure the date is correct.\n");
+			return null;
+		}
+		Account temp = new MoneyMarket(holder, amount, date); //can't instantiate a generic account so use this to pass the data to the caller
+		return temp;
+	}
+	
+	public void btnOCOpen_action() 
+	{
+		int length = account_db.getSize();
+		if(radOCSavings.isSelected()) {
+			boolean loyal = chkbxOCIsLoyal.isSelected();
+			Account temp = parseAccountData();
+			if(temp == null)
+				return; //error messages handled in callee
+			Savings account = new Savings(temp.getHolder(), temp.getBalance(), temp.getDate(), loyal);
+			this.account_db.add(account);
+			if(account_db.getSize() > length)
+				display.appendText("Successfully added the savings account.\n");
+			else
+				display.appendText("Account already added, nothing to do.\n");
+		}
+		else if(radOCChecking.isSelected()) {
+			boolean directDeposit = chkbxOCIsDirectDeposit.isSelected();
+			Account temp = parseAccountData();
+			if(temp == null)
+				return; //error messages handled in callee
+			Checking account = new Checking(temp.getHolder(), temp.getBalance(), temp.getDate(), directDeposit);
+			this.account_db.add(account);
+			if(account_db.getSize() > length)
+				display.appendText("Successfully added the checking account.\n");
+			else
+				display.appendText("Account already added, nothing to do.\n");
+		}
+		else if(radOCMoneyMarket.isSelected()) {
+			MoneyMarket account = (MoneyMarket) parseAccountData();
+			if(account == null)
+				return; //error messages handled in callee
+			this.account_db.add(account);
+			if(account_db.getSize() > length)
+				display.appendText("Successfully added the money market account.\n");
+			else
+				display.appendText("Account already added, nothing to do.\n");
+		}
+		else {
+			display.appendText("Please select an account type and try again.\n");
+		}
+	}
+	public void btnOCClose_action() 
+	{
+		Account temp = parseAccountData();
+		if(temp == null) return; //handled by callee
+		Account account;
+		if(radOCSavings.isSelected()) {
+			account = new Savings(temp.getHolder(), temp.getBalance(), temp.getDate(), chkbxOCIsLoyal.isSelected());
+		}
+		else if(radOCChecking.isSelected()) {
+			account = new Checking(temp.getHolder(), temp.getBalance(), temp.getDate(), chkbxOCIsDirectDeposit.isSelected());
+		}
+		else if(radOCMoneyMarket.isSelected()) {
+			account = temp; //already money market
+		}
+		else {
+			display.appendText("Please select an account type.\n");
+			return;
+		}
+		if(account_db.remove(account)) {
+			display.appendText("Account successfully deleted.\n");
+		}
+		else {
+			display.appendText("Account not found.\n");
+		}
+	}
 	public void isSavings_event(ActionEvent event)
 	{
 		if(radOCSavings.isArmed()) {
