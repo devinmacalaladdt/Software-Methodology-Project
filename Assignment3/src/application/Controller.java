@@ -92,6 +92,13 @@ public class Controller {
 			
 		}
 		
+		if(Double.parseDouble(depowith_amount.getText())<0) {
+			
+			display.appendText("Please enter a valid amount"+"\n");
+			return;
+			
+		}
+		
 		if(depowith_savings.isSelected()) {
 
 			if(!account_db.deposit(new Savings(new Profile(depowith_firstname.getText(),depowith_lastname.getText()),0,
@@ -134,6 +141,13 @@ public class Controller {
 			Double.parseDouble(depowith_amount.getText());
 			
 		}catch(NumberFormatException e) {
+			
+			display.appendText("Please enter a valid amount"+"\n");
+			return;
+			
+		}
+		
+		if(Double.parseDouble(depowith_amount.getText())<0) {
 			
 			display.appendText("Please enter a valid amount"+"\n");
 			return;
