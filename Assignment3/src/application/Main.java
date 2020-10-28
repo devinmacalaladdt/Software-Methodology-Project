@@ -7,9 +7,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.fxml.FXMLLoader;
 
-
+/**
+ * Driver Class to link fxml and set the stage
+ * @author Devin Macalalad, David Gasperini
+ */
 public class Main extends Application {
 	@Override
+	/**
+	 * start method to initialize the GUI and stage
+	 * @param primaryStage: stage object to initialize
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FlowPane root = (FlowPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));

@@ -141,6 +141,7 @@ public class AccountDatabase {
 	/**
 	 * Sorts the account database by date opened
 	 * prints accounts and relevant information, then changes balance according to fee and interest
+	 * @param display: textArea to append to
 	 */
 	public void printByDateOpen(TextArea display)
 	{
@@ -166,6 +167,7 @@ public class AccountDatabase {
 	/**
 	 * Sorts the account database by holder's last name
 	 * prints accounts and relevant information, then changes balance according to fee and interest
+	 * @param display: textArea to append to
 	 */
 	public void printByLastName(TextArea display)
 	{
@@ -190,6 +192,7 @@ public class AccountDatabase {
 	
 	/**
 	 * prints accounts
+	 * @param display: textArea to append to
 	 */
 	public void printAccounts(TextArea display)
 	{

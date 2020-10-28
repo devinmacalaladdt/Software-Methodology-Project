@@ -17,7 +17,11 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 
-
+/**
+ * Controller Class to link functionality to buttons/input on GUI
+ * Contains action methods and helper methods for each input source
+ * @author Devin Macalalad, David Gasperini
+ */
 public class Controller {
 	
 	AccountDatabase account_db;
@@ -81,6 +85,11 @@ public class Controller {
 	@FXML
 	private Button btnPickPathImport;
 
+	/**
+	 * Attempts to make deposit on account specified by text fields in Deposit/Withdrawal tab
+	 * Displays output on success or error
+	 */
+	@FXML
 	public void deposit_action() {
 		
 		try {
@@ -136,6 +145,11 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Attempts to make deposit on account specified by text fields in Deposit/Withdrawal tab
+	 * Displays output on success or error
+	 */
+	@FXML
 	public void withdrawal_action() {
 		
 		try {
@@ -218,6 +232,7 @@ public class Controller {
 	//open / close tab
 	/**
 	 * helper method to aid in account data collection and validation
+	 * @return Account object constructed from inputs of the tab, null if invalid or missing information submitted
 	 */
 	private Account parseAccountData() {
 		Profile holder;
@@ -261,6 +276,7 @@ public class Controller {
 	/**
 	 * attempts to add a new account, or states the account already exists
 	 */
+	@FXML
 	public void btnOCOpen_action() 
 	{
 		int length = account_db.getSize();
@@ -305,6 +321,7 @@ public class Controller {
 	/**
 	 * searches for and terminates the given account
 	 */
+	@FXML
 	public void btnOCClose_action() 
 	{
 		Account temp = parseAccountData();
@@ -332,6 +349,7 @@ public class Controller {
 	}
 	/**
 	 * toggle changes to checkboxes based on radio button account type selected
+	 * @param event: current event
 	 */
 	public void isSavings_event(ActionEvent event)
 	{
@@ -344,6 +362,7 @@ public class Controller {
 	}
 	/**
 	 * toggle changes to checkboxes based on radio button account type selected
+	 * @param event: current event
 	 */
 	public void isChecking_event(ActionEvent event)
 	{
@@ -356,6 +375,7 @@ public class Controller {
 	}
 	/**
 	 * toggle changes to checkboxes based on radio button account type selected
+	 * @param event: current event
 	 */
 	public void isMoneyMarket_event(ActionEvent event)
 	{
@@ -376,7 +396,10 @@ public class Controller {
 	@FXML
 	private Button by_date_open;
 	
-	
+	/**
+	 * prints standard list of accounts to output textArea
+	 */
+	@FXML
 	public void print_accounts_action() {
 		
 		if(account_db.getSize() == 0) {
@@ -394,6 +417,10 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * prints statements of accounts to output textArea ordered by last name
+	 */
+	@FXML
 	public void by_last_name_action() {
 		
 		if(account_db.getSize() == 0) {
@@ -409,6 +436,10 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * prints statements of accounts to output textArea ordered by date opened
+	 */
+	@FXML
 	public void by_date_open_action() {
 		
 		if(account_db.getSize() == 0) {
@@ -442,6 +473,7 @@ public class Controller {
 	/**
 	 * Opens a file explorer to aid in typing the path
 	 */
+	@FXML
 	public void btnPickPathImport_action() {
 		 FileChooser fileChooser = new FileChooser();
 		 fileChooser.setTitle("Open Resource File");
@@ -455,6 +487,7 @@ public class Controller {
 	/**
 	 * Action when pressing import file; handles file IO
 	 */
+	@FXML
 	public void btnFileOpen_action() {
 		String path = txtFile.getText();
 		try{
@@ -507,6 +540,7 @@ public class Controller {
 	/**
 	 * Action when pressing export file; handles file IO
 	 */
+	@FXML
 	public void btnFileOut_action() {
 		String path = txtFileOut.getText();
 		try{
@@ -526,6 +560,10 @@ public class Controller {
 		display.appendText("Exported File\n");
 	}
 	
+	/**
+	 * Constructor for Controller class
+	 * Allocates new Account Database with initial size of 5
+	 */
 	public Controller() {
 		
 		this.account_db = new AccountDatabase(5);
