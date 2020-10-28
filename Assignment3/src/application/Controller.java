@@ -3,18 +3,18 @@ package application;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.StringTokenizer;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 
 
@@ -31,8 +31,6 @@ public class Controller {
 	private TextArea txtFileOut;
 	@FXML
 	private Button btnFileOut;
-	
-	private String display_string;
 	
 	//deposit/withdrawal tab
 	
@@ -78,6 +76,10 @@ public class Controller {
 	private Button btnOCOpen;
 	@FXML
 	private Button btnOCClose;
+	@FXML
+	private Button btnPickPathExport;
+	@FXML
+	private Button btnPickPathImport;
 
 	public void deposit_action() {
 		
@@ -214,7 +216,9 @@ public class Controller {
 	}
 	
 	//open / close tab
-	
+	/**
+	 * helper method to aid in account data collection and validation
+	 */
 	private Account parseAccountData() {
 		Profile holder;
 		String firstName = txtOCFirstName.getText();
@@ -254,7 +258,9 @@ public class Controller {
 		Account temp = new MoneyMarket(holder, amount, date); //can't instantiate a generic account so use this to pass the data to the caller
 		return temp;
 	}
-	
+	/**
+	 * attempts to add a new account, or states the account already exists
+	 */
 	public void btnOCOpen_action() 
 	{
 		int length = account_db.getSize();
@@ -296,6 +302,9 @@ public class Controller {
 			display.appendText("Please select an account type and try again.\n");
 		}
 	}
+	/**
+	 * searches for and terminates the given account
+	 */
 	public void btnOCClose_action() 
 	{
 		Account temp = parseAccountData();
@@ -321,6 +330,9 @@ public class Controller {
 			display.appendText("Account not found.\n");
 		}
 	}
+	/**
+	 * toggle changes to checkboxes based on radio button account type selected
+	 */
 	public void isSavings_event(ActionEvent event)
 	{
 		if(radOCSavings.isArmed()) {
@@ -330,6 +342,9 @@ public class Controller {
 			chkbxOCIsLoyal.setSelected(false);
 		}
 	}
+	/**
+	 * toggle changes to checkboxes based on radio button account type selected
+	 */
 	public void isChecking_event(ActionEvent event)
 	{
 		if(radOCChecking.isArmed()) {
@@ -339,6 +354,9 @@ public class Controller {
 			chkbxOCIsLoyal.setSelected(false);
 		}
 	}
+	/**
+	 * toggle changes to checkboxes based on radio button account type selected
+	 */
 	public void isMoneyMarket_event(ActionEvent event)
 	{
 		if(radOCMoneyMarket.isArmed()) {
@@ -406,6 +424,37 @@ public class Controller {
 		
 	}
 	
+	@FXML
+	private AnchorPane ancpanInOut;
+	/**
+	 * Opens a file explorer to aid in typing the path
+	 */
+	public void btnPickPathExport_action() {
+		 FileChooser fileChooser = new FileChooser();
+		 fileChooser.setTitle("Open Resource File");
+		 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		 File temp = fileChooser.showOpenDialog(ancpanInOut.getScene().getWindow());
+		 String path;
+		 if(temp == null) path = "";
+		 else path = temp.getPath();
+		 txtFileOut.setText("" + path);
+	}
+	/**
+	 * Opens a file explorer to aid in typing the path
+	 */
+	public void btnPickPathImport_action() {
+		 FileChooser fileChooser = new FileChooser();
+		 fileChooser.setTitle("Open Resource File");
+		 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		 File temp = fileChooser.showOpenDialog(ancpanInOut.getScene().getWindow());
+		 String path;
+		 if(temp == null) path = "";
+		 else path = temp.getPath();
+		 txtFile.setText("" + path);
+	}
+	/**
+	 * Action when pressing import file; handles file IO
+	 */
 	public void btnFileOpen_action() {
 		String path = txtFile.getText();
 		try{
@@ -455,7 +504,9 @@ public class Controller {
 		
 		display.appendText("Imported File\n");
 	}
-	
+	/**
+	 * Action when pressing export file; handles file IO
+	 */
 	public void btnFileOut_action() {
 		String path = txtFileOut.getText();
 		try{
@@ -463,7 +514,6 @@ public class Controller {
 			if(!f.exists()) {
 				display.appendText("File not found, creating new file.\n");
 				f.createNewFile();
-				return;
 			}
 			BufferedWriter fout = new BufferedWriter(new FileWriter(path));
 			String write = account_db.formatDatabaseForStorage();
@@ -478,7 +528,6 @@ public class Controller {
 	
 	public Controller() {
 		
-		this.display_string = "";
 		this.account_db = new AccountDatabase(5);
 		
 	}
