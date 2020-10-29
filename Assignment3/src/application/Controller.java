@@ -252,6 +252,10 @@ public class Controller {
 				display.appendText("An exception has occured while reading the amount.\n");
 				return null;
 			}
+			if(amount < 0) {
+				display.appendText("The balance must be non negative.\n");
+				return null;
+			}
 		}
 		else {
 			display.appendText("Please ensure the amount is correct.\n");
