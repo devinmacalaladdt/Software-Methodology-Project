@@ -51,6 +51,11 @@ public class Profile {
 		if(lname.toLowerCase().equals(holder.getlname().toLowerCase()))
 				return 0;
 		for(int x = 0; x < lname.length(); x++) {
+			if(x>(holder.getlname()).length()-1) {
+				
+				return 1;
+				
+			}
 			if(lname.toLowerCase().charAt(x) > holder.getlname().toLowerCase().charAt(x))
 				return 1;
 			else if(lname.toLowerCase().charAt(x) < holder.getlname().toLowerCase().charAt(x))
