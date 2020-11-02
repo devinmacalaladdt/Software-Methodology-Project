@@ -249,7 +249,7 @@ public class Controller {
 		if(strAmount != null && !strAmount.equals("")) {
 			try {amount = Double.parseDouble(strAmount);}
 			catch (NumberFormatException nfe) {
-				display.appendText("An exception has occured while reading the amount.\n");
+				display.appendText("Please enter a nonnegative numeric amount.\n");
 				return null;
 			}
 			if(amount < 0) {
@@ -547,6 +547,10 @@ public class Controller {
 	@FXML
 	public void btnFileOut_action() {
 		String path = txtFileOut.getText();
+		if(path == null || path.equals("")) {
+			display.appendText("No file name, please fill in the adjacent textbox.\n");
+			return;
+		}
 		try{
 			File f = new File(path);
 			if(!f.exists()) {
@@ -557,11 +561,11 @@ public class Controller {
 			String write = account_db.formatDatabaseForStorage();
 			fout.write(write);
 			fout.close();
+			display.appendText("Exported File\n");
 		}
 		catch(IOException ioe) {
-			display.appendText("IO Exception has occured, check the file name\n");
+			display.appendText("Cannot export, the filename or file path is probably invalid.\n");
 		}
-		display.appendText("Exported File\n");
 	}
 	
 	/**
