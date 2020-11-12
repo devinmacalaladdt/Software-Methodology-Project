@@ -8,6 +8,16 @@ public abstract class Sandwich implements Customizable{
 	static final double PER_EXTRA = 1.99;
 	protected ArrayList<Extra> extras;
 	public abstract double price();
+	
+	/*For purposes of tableview, object has line associated*/
+	protected int lineNo = -1;
+	public int getLineNo() {
+		return lineNo;
+	}
+	public void setLineNo(int lineNo) {
+		this.lineNo = lineNo;
+	}
+	
 	public boolean add(Object obj) {
 		
 		if(obj instanceof Extra) {
@@ -49,5 +59,7 @@ public abstract class Sandwich implements Customizable{
 		return "";
 		
 	}
+
+	protected abstract Sandwich copy();
 	
 }
