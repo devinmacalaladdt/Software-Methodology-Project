@@ -10,12 +10,36 @@ public abstract class Sandwich implements Customizable{
 	public abstract double price();
 	public boolean add(Object obj) {
 		
-		return false;
+		if(obj instanceof Extra) {
+			
+			if(extras.size() >= MAX_EXTRAS) {
+				
+				return false;
+				
+			}
+			extras.add((Extra) obj);
+			
+		}
+		return true;
 		
 	}
 	
 	public boolean remove(Object obj) {
 		
+		if(obj instanceof Extra) {
+			
+			for(int c = 0; c < extras.size(); c++) {
+				
+				if((extras.get(c).getType()).equals(((Extra)obj).getType())) {
+					
+					extras.remove(c);
+					return true;
+					
+				}
+				
+			}
+			
+		}
 		return false;
 		
 	}
