@@ -16,7 +16,18 @@ public class Chicken extends Sandwich{
 	@Override
 	public String toString() {
 		
-		return "";
+		String ingredients = "";
+		for(String s: basicIngredients) {
+			
+			ingredients += s + ", ";
+			
+		}
+		for(Extra e: this.extras) {
+			
+			ingredients += e.getType() + ", ";
+			
+		}
+		return super.toString() + ingredients + "Price $" + String.format("%.2f", price());
 		
 	}
 	

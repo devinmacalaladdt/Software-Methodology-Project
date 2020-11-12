@@ -56,7 +56,7 @@ public abstract class Sandwich implements Customizable{
 	
 	public String toString() { 
 		
-		return "";
+		return this.getClass().getName().replace("application.", "") + " Sandwich: ";
 		
 	}
 

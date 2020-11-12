@@ -2,6 +2,7 @@ package application;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,6 +51,10 @@ public class SandwichController {
 	private Button clear;
 	
 	private Sandwich currentSandwich;
+	
+	private OrderLine orderline;
+	
+	public static Order order;
 	
 	@FXML
 	public void selectMeat() {
@@ -159,13 +167,38 @@ public class SandwichController {
 	@FXML
 	public void addToOrder() {
 		
-		
+		orderline = new OrderLine(currentSandwich,currentSandwich.price());
+		order.add(orderline);
+		display.appendText("Added- " + currentSandwich.toString()+"\n");
+		selectMeat();
 		
 	}
 	@FXML
 	public void showOrder() {
 		
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Orderline.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Order Line");
+            stage.setScene(new Scene(root, 800,600));
+            stage.show();
+            // Hide this current window (if this is what you want)
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 		
+//		try {
+//			SplitPane root = (SplitPane)
+//			Scene scene = new Scene(root,800,600);
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			primaryStage.setScene(scene);
+//			primaryStage.setTitle("Order Line");
+//			primaryStage.show();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 	
@@ -196,6 +229,7 @@ public class SandwichController {
 		display.setEditable(false);
 		extraIngredients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		addedIngredients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		order = new Order();
 		currentSandwich = new Chicken();
 		meat.setValue("Chicken");
 		selectMeat();

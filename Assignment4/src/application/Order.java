@@ -18,5 +18,12 @@ public class Order implements Customizable{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public Order() {
+		
+		orderlines = new ArrayList<OrderLine>(); 
+		lineNumber = 0;
+		
+	}
 
 }
