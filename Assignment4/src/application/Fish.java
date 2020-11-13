@@ -36,10 +36,4 @@ public class Fish extends Sandwich{
 		
 	}
 
-	@Override
-	protected Sandwich copy() {
-		return new Fish();
-	}
-
-
 }

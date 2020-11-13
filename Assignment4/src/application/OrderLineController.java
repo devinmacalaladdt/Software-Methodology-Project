@@ -1,17 +1,25 @@
 package application;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 /**
  * Controller Class to link functionality to buttons/input on GUI for orderline
  * Contains action methods and helper methods for each input source
@@ -31,88 +39,89 @@ public class OrderLineController implements Initializable{
 	@FXML
 	private TextArea txtTotal;
 	@FXML
-	private TableColumn tblcolQuantity;
+	private ListView lstMain;
 	@FXML
-	private TableColumn tblcolSandwich;
-	@FXML
-	private TableColumn tblcolExtras;
-	@FXML
-	private TableColumn tblcolTotal;
-	@FXML
-	private TableView tblMain;
+	private AnchorPane ancpanOrderLine;
 	
 	@FXML
 	private void btnClose_action() {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
-	    stage.close();
+	    //stage.close();
+		stage.hide();
 	}
 	
 	@FXML
 	private void btnClear_action() {
-		tblMain.getItems().clear();
 		total = 0.0;
 		txtTotal.setText("" + total);
-		lineNumber = 0;
+		for(int x = 0; x < lstMain.getItems().size(); x++)
+			order.remove(order.Get(0));
+		lstMain.getItems().clear();
 	}
 	
 	@FXML
 	private void btnCE_action() {
-		TablePosition pos = (TablePosition) tblMain.getSelectionModel().getSelectedCells().get(0);
-		int row = pos.getRow();
-		Sandwich sandwich = (Sandwich) tblMain.getItems().get(row);
-		total -= sandwich.price();
+		int row = lstMain.getSelectionModel().getSelectedIndex();
+		OrderLine line = order.Get(row);
+		total -= line.getPrice();
 		setTotal();
-		lineNumber--;
-		for(int x = row+1; x < tblMain.getItems().size(); x++) {
-			Sandwich temp = (Sandwich) tblMain.getItems().get(x);
+		order.remove(line);
+		for(int x = row+1; x < lstMain.getItems().size(); x++) {
+			OrderLine temp = order.Get(x);
 			temp.setLineNo(temp.getLineNo()-1);
 		}
-		tblMain.getItems().removeAll(tblMain.getSelectionModel().getSelectedItem());
+		lstMain.getItems().remove(lstMain.getSelectionModel().getSelectedItem());
 	}
 	
 	@FXML
 	private void btnExport_action() {
-		
+		FileChooser fileChooser = new FileChooser();
+		 fileChooser.setTitle("Save Order File");
+		 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		 File f = fileChooser.showOpenDialog(ancpanOrderLine.getScene().getWindow());
+		 try{
+				if(!f.exists()) {
+					f.createNewFile();
+				}
+				BufferedWriter fout = new BufferedWriter(new FileWriter(f));
+				String write = "";
+				for(int x = 0; x < lstMain.getItems().size(); x++)
+					write += order.Get(x).getSandwich().toString() + '\n';
+				fout.write(write);
+				fout.close();
+			}
+			catch(IOException ioe) {}
 	}
 	
 	@FXML
 	private void btnDup_action() {
-		TablePosition pos = (TablePosition) tblMain.getSelectionModel().getSelectedCells().get(0);
-		int row = pos.getRow();
-		Sandwich sandwich = (Sandwich) tblMain.getItems().get(row);
-		Sandwich clonewich = (Sandwich) sandwich.copy();
-		addEntry(clonewich);
+		int row = lstMain.getSelectionModel().getSelectedIndex();
+		Sandwich sandwich = order.Get(row).getSandwich();
+		OrderLine clonewich = new OrderLine(sandwich, sandwich.price());
+		order.add(clonewich);
+		addEntry(clonewich.getSandwich());
 	}
-	
-	private void init() {
-		tblcolQuantity.setCellValueFactory(new PropertyValueFactory<Sandwich, Integer>("lineNo"));
-		tblcolSandwich.setCellValueFactory(new PropertyValueFactory<Sandwich, String>("Sandwich"));
-		tblcolExtras.setCellValueFactory(new PropertyValueFactory<Sandwich, String>("Extras"));
-		tblcolTotal.setCellValueFactory(new PropertyValueFactory<Sandwich, Double>("Total"));
-		addEntry(new Chicken());
-	}
-	
+		
 	private double total = 0.0;
-	private int lineNumber = 0;
 	
 	private void addEntry(Sandwich item) {
 		if(item != null) {
-			item.setLineNo(lineNumber);
-			lineNumber++;
-			tblMain.getItems().addAll(item);
+			order.add(new OrderLine(item, item.price()));
+			lstMain.getItems().addAll(item);
 			total += item.price();
 			setTotal();
 		}
 	}
 	
 	private void setTotal() {
-		double roundedTotal = (double)(Math.round(total * 100)) / 100;
-		txtTotal.setText("" + roundedTotal);
+		txtTotal.setText("" + String.format("%.2f", Math.abs(total)));
 	}
 
+	Order order;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		init();
+		order = new Order();	
+		addEntry(new Chicken());
 	}
 }

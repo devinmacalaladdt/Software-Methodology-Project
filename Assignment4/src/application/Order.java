@@ -9,14 +9,30 @@ public class Order implements Customizable{
 
 	@Override
 	public boolean add(Object obj) {
-		// TODO Auto-generated method stub
+		if(obj instanceof OrderLine) {
+			OrderLine line = (OrderLine) obj;
+			orderlines.add(line);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean remove(Object obj) {
-		// TODO Auto-generated method stub
+		if(obj instanceof OrderLine) {
+			OrderLine line = (OrderLine) obj;
+			int index = orderlines.indexOf(line);
+			if(index < 0) return false;
+			orderlines.remove(orderlines.get(index));
+			return true;
+		}
 		return false;
+	}
+	
+	public OrderLine Get(int index) {
+		if(index < 0 || index >= orderlines.size())
+			return null;
+		return orderlines.get(index); 
 	}
 	
 	public Order() {

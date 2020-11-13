@@ -36,10 +36,4 @@ public class Beef extends Sandwich{
 		
 	}
 
-	@Override
-	protected Sandwich copy() {
-		return new Beef();
-	}
-
-
 }

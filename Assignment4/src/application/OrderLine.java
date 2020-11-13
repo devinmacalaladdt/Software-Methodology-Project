@@ -13,5 +13,21 @@ public class OrderLine {
 		
 		
 	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public Sandwich getSandwich() {
+		return sandwich;
+	}
+	
+	public void setLineNo(int No) {
+		lineNumber = No;
+	}
+	
+	public int getLineNo() {
+		return lineNumber;
+	}
 		
 }

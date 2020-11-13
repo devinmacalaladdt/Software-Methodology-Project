@@ -59,7 +59,5 @@ public abstract class Sandwich implements Customizable{
 		return this.getClass().getName().replace("application.", "") + " Sandwich: ";
 		
 	}
-
-	protected abstract Sandwich copy();
 	
 }
