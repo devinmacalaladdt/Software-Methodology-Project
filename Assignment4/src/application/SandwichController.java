@@ -23,6 +23,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+
+/**
+ * Controller Class to link functionality to buttons/input on GUI for sandwich order
+ * Contains action methods and helper methods for each input source
+ * @author Devin Macalalad, David Gasperini
+ */
 public class SandwichController {
 	
 	@FXML
@@ -56,6 +62,10 @@ public class SandwichController {
 	
 	public static Order order;
 	
+	/**
+	 * Method to change picture, update basic ingredients, and update price based on sandwich type combobox. Also sets
+	 * current sandwich to specified type with
+	 */
 	@FXML
 	public void selectMeat() {
 		
@@ -127,6 +137,11 @@ public class SandwichController {
 		resetListViews();
 		
 	}
+	
+	/**
+	 * Method to add selected ingredients to the current sandwich and to extras added list.
+	 * Displays error if over Maximum extras and updates price
+	 */
 	@FXML
 	public void addIngredients() {
 		
@@ -149,6 +164,11 @@ public class SandwichController {
 		updatePrice();
 		
 	}
+	
+	/**
+	 * Method to remove selected ingredients from the current sandwich and add to extras list.
+	 * Also updates the price.
+	 */
 	@FXML
 	public void removeIngredients() {
 		
@@ -164,6 +184,9 @@ public class SandwichController {
 		updatePrice();
 		
 	}
+	/**
+	 * Added current sandwich and extras to order list
+	 */
 	@FXML
 	public void addToOrder() {
 		
@@ -179,6 +202,9 @@ public class SandwichController {
 	FXMLLoader loader;
 	OrderLineController o;
 	
+	/**
+	 * Displays Order Line stage. If it is the first time being called, it is first initialized.
+	 */
 	@FXML
 	public void showOrder() {
 		if(isFirstTime) {
@@ -206,12 +232,19 @@ public class SandwichController {
 		}
 	}
 	
+	/**
+	 * updates price field based on current sandwich and ingredients list
+	 */
 	public void updatePrice() {
 		
 		price.clear();
 		this.price.appendText("$"+String.format("%.2f", currentSandwich.price()));
 		
 	}
+	
+	/**
+	 * resets the ingredients lists to default
+	 */
 	@FXML
 	public void resetListViews() {
 		
@@ -225,6 +258,9 @@ public class SandwichController {
 		
 	}
 	
+	/**
+	 * sets up default view, sandwich, and extras lists
+	 */
     @FXML
     public void initialize() {
     	

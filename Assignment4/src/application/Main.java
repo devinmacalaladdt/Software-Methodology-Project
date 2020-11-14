@@ -7,8 +7,14 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
-
+/**
+ * Class that initializes and displays the Sandwich Order Stage
+ * @author Devin Macalalad, David Gasperini
+ */
 public class Main extends Application {
+	/**
+	 * Starts the Sandwich Order stage
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
