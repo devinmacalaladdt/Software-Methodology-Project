@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -45,6 +46,8 @@ public class OrderLineController implements Initializable{
 	@FXML
 	private AnchorPane ancpanOrderLine;
 	
+	private Alert alert;
+	
 	@FXML
 	private void btnClose_action() {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -64,17 +67,26 @@ public class OrderLineController implements Initializable{
 	
 	@FXML
 	private void btnCE_action() {
-		int row = lstMain.getSelectionModel().getSelectedIndex();
-		OrderLine line = order.getOrderLine().get(row);
-		total -= line.getPrice();
-		setTotal();
-		order.remove(line);
-		Order.lineNumber = 0;
-		for(int x = 0; x < order.getOrderLine().size(); x++) {
-			OrderLine temp = order.getOrderLine().get(x);
-			temp.setLineNo(Order.lineNumber++);
+		try {
+			
+			int row = lstMain.getSelectionModel().getSelectedIndex();
+			OrderLine line = order.getOrderLine().get(row);
+			total -= line.getPrice();
+			setTotal();
+			order.remove(line);
+			Order.lineNumber = 0;
+			for(int x = 0; x < order.getOrderLine().size(); x++) {
+				OrderLine temp = order.getOrderLine().get(x);
+				temp.setLineNo(Order.lineNumber++);
+			}
+			updateOrder();
+			
+		}catch(Exception e) {
+			
+			alert.setContentText("Please select a sandwich to clear");
+			alert.showAndWait();
+			
 		}
-		updateOrder();
 	}
 	
 	@FXML
@@ -99,11 +111,22 @@ public class OrderLineController implements Initializable{
 	
 	@FXML
 	private void btnDup_action() {
-		int row = lstMain.getSelectionModel().getSelectedIndex();
-		Sandwich sandwich = order.getOrderLine().get(row).getSandwich();
-		OrderLine clonewich = new OrderLine(sandwich, sandwich.price());
-		order.add(clonewich);
-		updateOrder();
+		
+		try {
+			
+			int row = lstMain.getSelectionModel().getSelectedIndex();
+			Sandwich sandwich = order.getOrderLine().get(row).getSandwich();
+			OrderLine clonewich = new OrderLine(sandwich, sandwich.price());
+			order.add(clonewich);
+			updateOrder();
+			
+		}catch(Exception e) {
+			
+			alert.setContentText("Please select a sandwich to duplicate");
+			alert.showAndWait();
+			
+		}
+		
 	}
 		
 	private static double total = 0.0;
@@ -117,6 +140,7 @@ public class OrderLineController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		order = SandwichController.order;
+		alert = new Alert(Alert.AlertType.ERROR);
 		
 		updateOrder();
 		
