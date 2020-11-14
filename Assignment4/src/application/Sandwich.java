@@ -10,13 +10,6 @@ public abstract class Sandwich implements Customizable{
 	public abstract double price();
 	
 	/*For purposes of tableview, object has line associated*/
-	protected int lineNo = -1;
-	public int getLineNo() {
-		return lineNo;
-	}
-	public void setLineNo(int lineNo) {
-		this.lineNo = lineNo;
-	}
 	
 	public boolean add(Object obj) {
 		

@@ -175,17 +175,22 @@ public class SandwichController {
 	}
 	boolean isFirstTime = true;
 	Stage orderLineStage;
+	Parent root;
+	FXMLLoader loader;
+	OrderLineController o;
 	
 	@FXML
 	public void showOrder() {
 		if(isFirstTime) {
-	        Parent root;
 	        try {
-	            root = FXMLLoader.load(getClass().getResource("Orderline.fxml"));
+	        	loader = new FXMLLoader(getClass().getResource("Orderline.fxml"));
+	            root = loader.load();
 	            orderLineStage = new Stage();
 	            orderLineStage.setTitle("Order Line");
 	            orderLineStage.setScene(new Scene(root, 800,600));
 	            orderLineStage.show();
+	            o = loader.getController();
+	            o.updateOrder();
 	            isFirstTime = false;
 	            // Hide this current window (if this is what you want)
 	        }
@@ -193,18 +198,10 @@ public class SandwichController {
 	            e.printStackTrace();
 	        }
 			
-	//		try {
-	//			SplitPane root = (SplitPane)
-	//			Scene scene = new Scene(root,800,600);
-	//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	//			primaryStage.setScene(scene);
-	//			primaryStage.setTitle("Order Line");
-	//			primaryStage.show();
-	//		} catch(Exception e) {
-	//			e.printStackTrace();
-	//		}
+
 		}
 		else {
+            o.updateOrder();
 			orderLineStage.show();
 		}
 	}

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -39,7 +41,7 @@ public class OrderLineController implements Initializable{
 	@FXML
 	private TextArea txtTotal;
 	@FXML
-	private ListView lstMain;
+	private ListView<String> lstMain;
 	@FXML
 	private AnchorPane ancpanOrderLine;
 	
@@ -54,23 +56,25 @@ public class OrderLineController implements Initializable{
 	private void btnClear_action() {
 		total = 0.0;
 		txtTotal.setText("" + total);
-		for(int x = 0; x < lstMain.getItems().size(); x++)
-			order.remove(order.Get(0));
-		lstMain.getItems().clear();
+		order.getOrderLine().clear();
+		Order.lineNumber = 0;
+		updateOrder();
+		
 	}
 	
 	@FXML
 	private void btnCE_action() {
 		int row = lstMain.getSelectionModel().getSelectedIndex();
-		OrderLine line = order.Get(row);
+		OrderLine line = order.getOrderLine().get(row);
 		total -= line.getPrice();
 		setTotal();
 		order.remove(line);
-		for(int x = row+1; x < lstMain.getItems().size(); x++) {
-			OrderLine temp = order.Get(x);
-			temp.setLineNo(temp.getLineNo()-1);
+		Order.lineNumber = 0;
+		for(int x = 0; x < order.getOrderLine().size(); x++) {
+			OrderLine temp = order.getOrderLine().get(x);
+			temp.setLineNo(Order.lineNumber++);
 		}
-		lstMain.getItems().remove(lstMain.getSelectionModel().getSelectedItem());
+		updateOrder();
 	}
 	
 	@FXML
@@ -86,7 +90,7 @@ public class OrderLineController implements Initializable{
 				BufferedWriter fout = new BufferedWriter(new FileWriter(f));
 				String write = "";
 				for(int x = 0; x < lstMain.getItems().size(); x++)
-					write += order.Get(x).getSandwich().toString() + '\n';
+					write += order.getOrderLine().get(x).getSandwich().toString() + '\n';
 				fout.write(write);
 				fout.close();
 			}
@@ -96,32 +100,43 @@ public class OrderLineController implements Initializable{
 	@FXML
 	private void btnDup_action() {
 		int row = lstMain.getSelectionModel().getSelectedIndex();
-		Sandwich sandwich = order.Get(row).getSandwich();
+		Sandwich sandwich = order.getOrderLine().get(row).getSandwich();
 		OrderLine clonewich = new OrderLine(sandwich, sandwich.price());
 		order.add(clonewich);
-		addEntry(clonewich.getSandwich());
+		updateOrder();
 	}
 		
-	private double total = 0.0;
-	
-	private void addEntry(Sandwich item) {
-		if(item != null) {
-			order.add(new OrderLine(item, item.price()));
-			lstMain.getItems().addAll(item);
-			total += item.price();
-			setTotal();
-		}
-	}
+	private static double total = 0.0;
 	
 	private void setTotal() {
 		txtTotal.setText("" + String.format("%.2f", Math.abs(total)));
 	}
 
-	Order order;
+	static Order order;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		order = new Order();	
-		addEntry(new Chicken());
+		order = SandwichController.order;
+		
+		updateOrder();
+		
+	}
+	
+	public void updateOrder() {
+		
+		ObservableList<String> orders = FXCollections.observableArrayList();
+		total = 0;
+		
+		for(int c = 0; c < order.getOrderLine().size(); c++) {
+			
+			orders.add(order.getOrderLine().get(c).getLineNo()+" "+order.getOrderLine().get(c).getSandwich().toString());
+			total += order.getOrderLine().get(c).getSandwich().price();
+			setTotal();
+			
+		}
+		
+		lstMain.getItems().clear();
+		lstMain.getItems().addAll(orders);
+		
 	}
 }

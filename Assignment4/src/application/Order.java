@@ -11,6 +11,7 @@ public class Order implements Customizable{
 	public boolean add(Object obj) {
 		if(obj instanceof OrderLine) {
 			OrderLine line = (OrderLine) obj;
+			line.setLineNo(lineNumber++);
 			orderlines.add(line);
 			return true;
 		}
@@ -29,10 +30,8 @@ public class Order implements Customizable{
 		return false;
 	}
 	
-	public OrderLine Get(int index) {
-		if(index < 0 || index >= orderlines.size())
-			return null;
-		return orderlines.get(index); 
+	public ArrayList<OrderLine> getOrderLine() {
+		return orderlines;
 	}
 	
 	public Order() {
