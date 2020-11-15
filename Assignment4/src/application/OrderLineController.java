@@ -14,11 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -48,13 +44,19 @@ public class OrderLineController implements Initializable{
 	
 	private Alert alert;
 	
+	
+	/**
+	 * Hides stage on close button press
+	 */
 	@FXML
 	private void btnClose_action() {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
-	    //stage.close();
 		stage.hide();
 	}
 	
+	/**
+	 * Clears listview and order on button press
+	 */
 	@FXML
 	private void btnClear_action() {
 		total = 0.0;
@@ -65,6 +67,10 @@ public class OrderLineController implements Initializable{
 		
 	}
 	
+	
+	/**
+	 * Clears selected entry on button press
+	 */
 	@FXML
 	private void btnCE_action() {
 		try {
@@ -89,6 +95,9 @@ public class OrderLineController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Writes order to file on button press
+	 */
 	@FXML
 	private void btnExport_action() {
 		FileChooser fileChooser = new FileChooser();
@@ -109,6 +118,9 @@ public class OrderLineController implements Initializable{
 			catch(IOException ioe) {}
 	}
 	
+	/**
+	 * Duplicates selected entry on button press
+	 */
 	@FXML
 	private void btnDup_action() {
 		
@@ -131,12 +143,18 @@ public class OrderLineController implements Initializable{
 		
 	private static double total = 0.0;
 	
+	/***
+	 * Formats total and sets the textbox
+	 */
 	private void setTotal() {
 		txtTotal.setText("" + String.format("%.2f", Math.abs(total)));
 	}
 
 	static Order order;
 	
+	/**
+	 * Initializes form
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		order = SandwichController.order;
@@ -146,6 +164,9 @@ public class OrderLineController implements Initializable{
 		
 	}
 	
+	/**
+	 * Updates the order list 
+	 */
 	public void updateOrder() {
 		
 		ObservableList<String> orders = FXCollections.observableArrayList();
