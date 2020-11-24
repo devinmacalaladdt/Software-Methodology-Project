@@ -24,28 +24,36 @@ public class MainActivity extends AppCompatActivity {
         chineseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MuseumofChinese.class);
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
+                String museum = getString(R.string.chinese_museum_indicator);
+                intent.putExtra(getString(R.string.museum_key),museum);
                 view.getContext().startActivity(intent);}
         });
 
         jewishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MuseumofJewish.class);
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
+                String museum = getString(R.string.jewish_museum_indicator);
+                intent.putExtra(getString(R.string.museum_key),museum);
                 view.getContext().startActivity(intent);}
         });
 
         newmuseumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NewMuseum.class);
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
+                String museum = getString(R.string.new_museum_indicator);
+                intent.putExtra(getString(R.string.museum_key),museum);
                 view.getContext().startActivity(intent);}
         });
 
         noguchiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Noguchi.class);
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
+                String museum = getString(R.string.noguchi_museum_indicator);
+                intent.putExtra(getString(R.string.museum_key),museum);
                 view.getContext().startActivity(intent);}
         });
 

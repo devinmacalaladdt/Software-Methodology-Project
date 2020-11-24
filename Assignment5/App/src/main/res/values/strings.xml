@@ -1,15 +1,20 @@
 <resources>
     <string name="app_name">Museum App</string>
+    <string name="chinese_museum_indicator">chinese</string>
+    <string name="jewish_museum_indicator">jewish</string>
+    <string name="new_museum_indicator">new</string>
+    <string name="noguchi_museum_indicator">noguchi</string>
+    <string name="museum_key">museum</string>
     <string name="ticket_price_calculator">Ticket Price Calculator</string>
     <string name="chinese">Museum of Chinese in America</string>
     <string name="jewish">Museum of Jewish Heritage</string>
     <string name="newmuseum">The New Museum</string>
     <string name="noguchi">Noguchi Museum</string>
     <string name="toast">Maximum of 5 tickets for each!</string>
-    <string name="chinaLink">https://www.mocanyc.org/visit/</string>
-    <string name="jewishLink">https://mjhnyc.org/purchase-tickets/</string>
-    <string name="newLink">https://www.newmuseum.org/visit</string>
-    <string name="noguchiLink">https://www.noguchi.org/museum/visit/</string>
+    <string name="chinaLink">https://www.mocanyc.org/</string>
+    <string name="jewishLink">https://mjhnyc.org/</string>
+    <string name="newLink">https://www.newmuseum.org/</string>
+    <string name="noguchiLink">https://www.noguchi.org/museum/</string>
     <!-- DO NOT DELETE Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

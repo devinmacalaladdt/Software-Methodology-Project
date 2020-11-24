@@ -9,10 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseamApp">
-        <activity android:name=".Noguchi" android:label="@string/ticket_price_calculator"></activity>
-        <activity android:name=".NewMuseum" android:label="@string/ticket_price_calculator"></activity>
-        <activity android:name=".MuseumofJewish" android:label="@string/ticket_price_calculator"></activity>
-        <activity android:name=".MuseumofChinese" android:label="@string/ticket_price_calculator" ></activity>
+        <activity android:name=".MainActivity2" android:label="@string/ticket_price_calculator" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
