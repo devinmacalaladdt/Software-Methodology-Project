@@ -15,6 +15,13 @@
     <string name="jewishLink">https://mjhnyc.org/</string>
     <string name="newLink">https://www.newmuseum.org/</string>
     <string name="noguchiLink">https://www.noguchi.org/museum/</string>
+    <string name="adult">Adult: $</string>
+    <string name="student">Students: $</string>
+    <string name="senior">Seniors: $</string>
+    <string name="calc">Calculate Total</string>
+    <string name="sub">Sub Total: $</string>
+    <string name="tax">Tax: $</string>
+    <string name="total">Total: $</string>
     <!-- DO NOT DELETE Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
