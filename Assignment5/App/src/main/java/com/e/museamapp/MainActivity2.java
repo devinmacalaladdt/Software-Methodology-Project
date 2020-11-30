@@ -1,3 +1,6 @@
+/**
+ * Devin Macalalad and David Gasperini
+ */
 package com.e.museamapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
-    //final int[] museum = {Student, Adult, Senior};
+
     final int[] chinese = {8,12,8};
     final int[] jewish = {10,16,12};
     final int[] new_museum = {12,18,15};
@@ -38,9 +41,9 @@ public class MainActivity2 extends AppCompatActivity {
         TextView txtSenior = (TextView)findViewById(R.id.txtSenior);
         TextView txtAdult = (TextView)findViewById(R.id.txtAdult);
         if(museum.equals(getString(R.string.chinese_museum_indicator))){
-            txtStudent.append(""+chinese[0]);
-            txtAdult.append(""+chinese[1]);
-            txtSenior.append(""+chinese[2]);
+            txtStudent.append("" + chinese[0]);
+            txtAdult.append("" + chinese[1]);
+            txtSenior.append("" + chinese[2]);
             image.setImageResource(R.drawable.china);
             museum_name.setText(getString(R.string.chinese));
             image.setOnClickListener(new View.OnClickListener() {
@@ -51,9 +54,9 @@ public class MainActivity2 extends AppCompatActivity {
                     startActivity(launchBrowser);}
             });
         }else if(museum.equals(getString(R.string.jewish_museum_indicator))){
-            txtStudent.append(""+jewish[0]);
-            txtAdult.append(""+jewish[1]);
-            txtSenior.append(""+jewish[2]);
+            txtStudent.append("" + jewish[0]);
+            txtAdult.append("" + jewish[1]);
+            txtSenior.append("" + jewish[2]);
             image.setImageResource(R.drawable.jewish);
             museum_name.setText(getString(R.string.jewish));
             image.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +67,9 @@ public class MainActivity2 extends AppCompatActivity {
                     startActivity(launchBrowser);}
             });
         }else if(museum.equals(getString(R.string.new_museum_indicator))){
-            txtStudent.append(""+new_museum[0]);
-            txtAdult.append(""+new_museum[1]);
-            txtSenior.append(""+new_museum[2]);
+            txtStudent.append("" + new_museum[0]);
+            txtAdult.append("" + new_museum[1]);
+            txtSenior.append("" + new_museum[2]);
             image.setImageResource(R.drawable.thenew);
             museum_name.setText(getString(R.string.newmuseum));
             image.setOnClickListener(new View.OnClickListener() {
@@ -77,9 +80,9 @@ public class MainActivity2 extends AppCompatActivity {
                     startActivity(launchBrowser);}
             });
         }else{
-            txtStudent.append(""+noguchi[0]);
-            txtAdult.append(""+noguchi[1]);
-            txtSenior.append(""+noguchi[2]);
+            txtStudent.append("" + noguchi[0]);
+            txtAdult.append("" + noguchi[1]);
+            txtSenior.append("" + noguchi[2]);
             image.setImageResource(R.drawable.noguchi);
             museum_name.setText(getString(R.string.noguchi));
             image.setOnClickListener(new View.OnClickListener() {
@@ -116,15 +119,15 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 taxes = subTotal * salesTaxNY;
                 total = subTotal + taxes;
-                taxes = Math.round(taxes*100)/100.0;
-                subTotal = Math.round(subTotal*100)/100.0;
-                total = Math.round(total*100)/100.0;
+                taxes = Math.round(taxes*100) / 100.0;
+                subTotal = Math.round(subTotal*100) / 100.0;
+                total = Math.round(total*100) / 100.0;
                 EditText txtbxSub = (EditText)findViewById(R.id.txtbxSub);
                 EditText txtbxTax = (EditText)findViewById(R.id.txtbxTax);
                 EditText txtbxTotal = (EditText)findViewById(R.id.txtbxTotal);
-                txtbxSub.setText(""+subTotal);
-                txtbxTax.setText(""+taxes);
-                txtbxTotal.setText(""+total);
+                txtbxSub.setText("" + subTotal);
+                txtbxTax.setText("" + taxes);
+                txtbxTotal.setText("" + total);
             }
         });
     }

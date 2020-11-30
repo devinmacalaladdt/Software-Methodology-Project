@@ -1,3 +1,6 @@
+/**
+ * Devin Macalalad and David Gasperini
+ */
 package com.e.museamapp;
 
 import androidx.appcompat.app.AppCompatActivity;
