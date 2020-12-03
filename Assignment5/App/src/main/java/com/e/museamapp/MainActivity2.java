@@ -18,6 +18,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Ticket calculation activity. Contains clickable image and specificatioins for ticket prices
+ */
 public class MainActivity2 extends AppCompatActivity {
 
     /**Constant 3-tuples representing the price data from the respective websites**/
@@ -166,6 +169,7 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
+    //For back button leading to homescreen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -10,15 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Main Activity. Contains buttons for each museum page and functionality to
+ * transition to 2nd activity
+ */
 public class MainActivity extends AppCompatActivity {
 
-
-
+    //Called on activity creation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //buttons to museum ticket calculator
+        //listeners for each
         Button chineseBtn = (Button)findViewById(R.id.chinese);
         Button jewishBtn = (Button)findViewById(R.id.jewish);
         Button newmuseumBtn = (Button)findViewById(R.id.newmuseum);
